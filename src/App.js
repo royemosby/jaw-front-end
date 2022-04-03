@@ -7,7 +7,7 @@ function App() {
       <header className="App-header bg-black">
         <img src={logo} className="App-logo" alt="logo" />
         <p className=" underline">
-          Edit stuff and save to reload.
+          Edit {process.env.NODE_ENV} and save to reload.
         </p>
         <a
           className="App-link"
