@@ -13,7 +13,7 @@ export function Login() {
   return (
     <div className="border-4 border-slate-400 p-2">
       <div className="w-60 self-center m-auto">
-        <img src={logo} />
+        <img src={logo} alt="Job Application Wrangler logo" />
       </div>
       <div>
         <h2 className="font-display mb-2 text-2xl">Log in to Job Application Wrangler</h2>
