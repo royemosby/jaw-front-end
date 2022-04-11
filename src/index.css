@@ -1,6 +1,12 @@
+@font-face {
+  font-family: 'Rye-Regular';
+  src: url('RyeRegular-MVZKe.ttf'), url(./RyeRegular-MVZKe.ttf) format('ttf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 body {
   margin: 0;
@@ -12,6 +18,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: 'Rye-Regular'
 }
