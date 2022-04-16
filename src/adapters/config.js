@@ -6,3 +6,14 @@ url.contacts = `${url.base}/contacts`
 url.login = `${url.base}/login`
 url.jobs = `${url.base}/jobs`
 url.users = `${url.base}/users`
+
+export function authConfig(body = {}) {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(body),
+  }
+}
