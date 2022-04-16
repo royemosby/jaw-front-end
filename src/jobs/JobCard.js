@@ -17,10 +17,11 @@ export function JobCard() {
         </div>
       </div>
       <p className="text-left">
-        Marcellus Wallace |{' '}
-        <a href="mailto:mwallace@test.com">
-          mwallace@pulp.co | <a href="tel:3344455566">334-445-5566</a>
-        </a>
+        Marcellus Wallace
+        <span> | </span>
+        <a href="mailto:mwallace@test.com">mwallace@pulp.com</a>
+        <span> | </span>
+        <a href="tel:3344455566">334-445-5566</a>
       </p>
       <div className="flex justify-between">
         <p>Open: 3/4/2022</p>
