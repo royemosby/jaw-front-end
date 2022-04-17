@@ -1,4 +1,3 @@
-import { store } from '../index.js'
 export const url = {
   base: process.env.REACT_APP_API_URL,
 }
@@ -18,12 +17,13 @@ export function authConfig(body = {}) {
   }
 }
 
-export function getConfig() {
+export function getConfig(jwt) {
   return {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
     },
   }
 }
