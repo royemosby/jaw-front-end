@@ -22,11 +22,11 @@ const userSlice = createSlice({
       state.jwt = action.payload.jwt
       state.message = ''
     },
-    setMessage: (state, action) => {
+    setUserMessage: (state, action) => {
       state.message = action.payload.message
     },
   },
 })
 
-export const { setUser, setMessage } = userSlice.actions
+export const { setUser, setUserMessage } = userSlice.actions
 export default userSlice.reducer
