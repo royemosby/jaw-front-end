@@ -17,3 +17,13 @@ export function authConfig(body = {}) {
     body: JSON.stringify(body),
   }
 }
+
+export function getConfig() {
+  return {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+  }
+}
