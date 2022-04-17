@@ -1,7 +1,22 @@
 import { Card } from '../common/Card'
 import placeholder from '../honey.svg'
 
-export function JobCard() {
+export function JobCard({
+  title,
+  job_type,
+  company,
+  location,
+  is_remote,
+  status,
+  posting_url,
+  logo_url,
+  date_posted,
+  date_applied,
+  description,
+  created_at,
+  updated_at,
+  contact_id,
+}) {
   return (
     <Card>
       <div className="flex">
@@ -9,24 +24,28 @@ export function JobCard() {
           <img src={placeholder} alt="" className="h-full" />
         </div>
         <div className="text-left grow">
-          <h2 className="text-left">Job title</h2>
-          <h3 className="text-left">Contact company</h3>
+          <h2 className="text-left">
+            {title} | {job_type}
+          </h2>
+          <h3 className="text-left">{company}</h3>
         </div>
         <div>
-          <p>New York, NY | Hybrid</p>
+          <p>
+            {location} | {is_remote}
+          </p>
         </div>
       </div>
       <p className="text-left">
-        Marcellus Wallace
+        Marcellus Wallace (contact id ({contact_id}))
         <span> | </span>
         <a href="mailto:mwallace@test.com">mwallace@pulp.com</a>
         <span> | </span>
         <a href="tel:3344455566">334-445-5566</a>
       </p>
       <div className="flex justify-between">
-        <p>Open: 3/4/2022</p>
-        <p>Applied: 3/5/2022</p>
-        <p>Status: Applied</p>
+        <p>Open: {date_posted}</p>
+        <p>Applied: {date_applied || 'N/A'}</p>
+        <p>Status: {status}</p>
       </div>
     </Card>
   )
