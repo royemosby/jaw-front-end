@@ -22,12 +22,12 @@ export function Jobs() {
       })
   }, [])
 
-  // const mapJobs = () => {
-  //   return jobs.map((job) => <JobCard job={job} />)
-  // }
-  return (
-    <div className="">
-      <JobCard></JobCard>
-    </div>
-  )
+  const mapJobs = () => {
+    if (message) {
+      return <h1>{message}</h1>
+    } else {
+      return jobs.map((job, id) => <JobCard {...job.attributes} key={id} />)
+    }
+  }
+  return <div className="">{mapJobs()}</div>
 }
