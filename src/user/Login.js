@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import logo from '../wrangler.svg'
 import { buttonStyles } from '../common/buttons/Button'
 import { url, authConfig } from '../adapters/config'
-import { setUser, setMessage } from '../user/userSlice'
+import { setUser, setUserMessage } from '../user/userSlice'
 
 export function Login() {
   const [username, setUsername] = useState('')
@@ -19,7 +19,7 @@ export function Login() {
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {
-          dispatch(setMessage(resp))
+          dispatch(setUserMessage(resp))
         } else {
           dispatch(setUser(resp))
         }
