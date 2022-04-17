@@ -1,19 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = []
+const initialState = {
+  jobs: [],
+  message: '',
+}
 
 const jobsSlice = createSlice({
   name: 'jobs',
   initialState,
   reducers: {
-    loadJobs(state, action) {
-      state.concat(action.payload)
+    addJobs: (state, action) => {
+      state.jobs = action.payload.data
     },
-    createJob(state, action) {
-      state.push(action.payload)
+    createJob: (state, action) => {
+      state.jobs.push(action.payload.data)
+    },
+    setJobsMessage: (state, action) => {
+      state.message = action.payload.message
     },
   },
 })
 
-export const { addJobs, createJob } = jobsSlice.actions
+export const { addJobs, createJob, setJobsMessage } = jobsSlice.actions
 export default jobsSlice.reducer
