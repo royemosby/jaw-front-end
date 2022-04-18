@@ -1,6 +1,7 @@
 import { Card } from '../common/Card'
 import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 import placeholder from '../honey.svg'
+import { useSelector } from 'react-redux'
 
 export function JobCard({
   company,
@@ -15,6 +16,23 @@ export function JobCard({
   status,
   title,
 }) {
+  const storeContacts = useSelector((state) => state.contacts.contacts)
+  const jobContact = () => {
+    if (contact_id) {
+      const matchingContact = storeContacts.find((c) => c.id === contact_id)
+      return (
+        <p className="text-left">
+          {matchingContact.first_name} {matchingContact.last_name}
+          <span> | </span>
+          <a href={`mailto:${matchingContact.email}`}>
+            {matchingContact.email}
+          </a>
+          <span> | </span>
+          <a href={`tel:${matchingContact.phone}`}>{matchingContact.phone}</a>
+        </p>
+      )
+    }
+  }
   return (
     <Card>
       <ConditionalLinkWrapper link={posting_url} condition={!!posting_url}>
@@ -39,13 +57,7 @@ export function JobCard({
           </div>
         </div>
       </ConditionalLinkWrapper>
-      <p className="text-left">
-        Marcellus Wallace (contact id ({contact_id}))
-        <span> | </span>
-        <a href="mailto:mwallace@test.com">mwallace@pulp.com</a>
-        <span> | </span>
-        <a href="tel:3344455566">334-445-5566</a>
-      </p>
+      {jobContact()}
       <div className="flex justify-between">
         <p>Open: {date_posted}</p>
         <p>Applied: {date_applied || 'N/A'}</p>
