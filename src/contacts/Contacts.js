@@ -26,7 +26,7 @@ export function Contacts() {
       return <h1>{message}</h1>
     } else {
       return contacts.map((contact, id) => (
-        <ContactCard {...contact.attributes} key={id} />
+        <ContactCard {...contact} key={id} />
       ))
     }
   }

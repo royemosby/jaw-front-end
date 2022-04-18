@@ -10,7 +10,13 @@ const contactsSlice = createSlice({
   initialState,
   reducers: {
     addContacts(state, action) {
-      state.contacts = action.payload.data
+      const contactsFlattened = action.payload.data.map((contact) => {
+        const contactFlattened = Object.assign({}, contact.attributes, {
+          jobs: contact.relationships.jobs.data,
+        })
+        return contactFlattened
+      })
+      state.contacts = contactsFlattened
     },
     createContact(state, action) {
       state.contacts.push(action.payload)

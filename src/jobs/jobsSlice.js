@@ -10,7 +10,10 @@ const jobsSlice = createSlice({
   initialState,
   reducers: {
     addJobs: (state, action) => {
-      state.jobs = action.payload.data
+      const jobsFlattened = action.payload.data.map((job) => {
+        return Object.assign({}, job.attributes)
+      })
+      state.jobs = jobsFlattened
     },
     createJob: (state, action) => {
       state.jobs.push(action.payload.data)
