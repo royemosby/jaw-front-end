@@ -3,20 +3,17 @@ import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 import placeholder from '../honey.svg'
 
 export function JobCard({
-  title,
-  job_type,
   company,
-  location,
-  is_remote,
-  status,
-  posting_url,
-  logo_url,
-  date_posted,
-  date_applied,
-  description,
-  created_at,
-  updated_at,
   contact_id,
+  date_applied,
+  date_posted,
+  is_remote,
+  job_type,
+  location,
+  logo_url,
+  posting_url,
+  status,
+  title,
 }) {
   return (
     <Card>
