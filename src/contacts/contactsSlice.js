@@ -1,19 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-const initialState = []
+const initialState = {
+  contacts: [],
+  message: '',
+}
 
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
   reducers: {
     addContacts(state, action) {
-      state.concat(action.payload)
+      state.contacts = action.payload.data
     },
     createContact(state, action) {
-      state.push(action.payload)
+      state.contacts.push(action.payload)
+    },
+    setContactsMessage: (state, action) => {
+      state.message = action.payload.message
     },
   },
 })
 
-export const { addContacts, createContact } = contactsSlice.actions
+export const { addContacts, createContact, setContactsMessage } =
+  contactsSlice.actions
 export default contactsSlice.reducer
