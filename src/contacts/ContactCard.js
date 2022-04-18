@@ -25,8 +25,8 @@ export function ContactCard({
       return (
         <div className="border-2 border-slate-500 rounded-sm p-0.5 m-0.5 bg-slate-900/25 max-w-5xl">
           <h1>Jobs Associated with {first_name}</h1>
-          {matchingJobs.map((j) => (
-            <h2>
+          {matchingJobs.map((j, i) => (
+            <h2 key={i}>
               {j.title} with {j.company} (Status: {j.status})
             </h2>
           ))}
