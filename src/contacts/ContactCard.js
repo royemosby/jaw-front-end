@@ -1,9 +1,25 @@
 import { Card } from '../common/Card'
+import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 
-export function ContactCard() {
+export function ContactCard({
+  first_name,
+  last_name,
+  contact_type,
+  email,
+  url,
+  phone,
+  created_at,
+  updated_at,
+}) {
   return (
     <Card>
-      <p>Joseph Smith | jsmith@oi.io | 334-334-3335</p>
+      <p>
+        <ConditionalLinkWrapper link={url} condition={!!url}>
+          {first_name} {last_name}{' '}
+        </ConditionalLinkWrapper>
+        | <a href={`mailto:${email}`}>{email}</a> |{' '}
+        <a href={`tel:${phone}`}>{phone}</a>
+      </p>
     </Card>
   )
 }
