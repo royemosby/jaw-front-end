@@ -37,12 +37,14 @@ function App() {
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/edit" element={<EditJob />} />
           <Route path="/jobs/new" element={<NewJob />} />
+          <Route path="*" element={<NotFound />} />
         </>
       )
     } else {
       return (
         <>
           <Route index element={<Login />} />
+          <Route path="*" element={<Login />} />
         </>
       )
     }
