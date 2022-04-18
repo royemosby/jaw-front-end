@@ -1,4 +1,5 @@
 import { Card } from '../common/Card'
+import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 import placeholder from '../honey.svg'
 
 export function JobCard({
@@ -19,22 +20,28 @@ export function JobCard({
 }) {
   return (
     <Card>
-      <div className="flex">
-        <div className="h-16 m-0.5">
-          <img src={placeholder} alt="" className="h-full" />
+      <ConditionalLinkWrapper link={posting_url} condition={!!posting_url}>
+        <div className="flex">
+          <div className="h-16 m-0.5">
+            <img
+              src={logo_url ? logo_url : placeholder}
+              alt=""
+              className="h-full"
+            />
+          </div>
+          <div className="text-left grow">
+            <h2 className="text-left">
+              {title} | {job_type}
+            </h2>
+            <h3 className="text-left">{company}</h3>
+          </div>
+          <div>
+            <p>
+              {location} | {is_remote}
+            </p>
+          </div>
         </div>
-        <div className="text-left grow">
-          <h2 className="text-left">
-            {title} | {job_type}
-          </h2>
-          <h3 className="text-left">{company}</h3>
-        </div>
-        <div>
-          <p>
-            {location} | {is_remote}
-          </p>
-        </div>
-      </div>
+      </ConditionalLinkWrapper>
       <p className="text-left">
         Marcellus Wallace (contact id ({contact_id}))
         <span> | </span>
