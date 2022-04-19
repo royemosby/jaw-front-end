@@ -5,6 +5,7 @@ const initialState = {
   contacts: {},
   contactIds: [],
   message: '',
+  shooters: 0,
 }
 
 const contactsSlice = createSlice({
@@ -28,8 +29,9 @@ const contactsSlice = createSlice({
     addContact(state, action) {
       const contactFlattened = action.payload.data.attributes
       const contactId = `contact${zeroPad(contactFlattened.id)}`
-      if (state.contactIds.include(contactId)) {
-        state.message = 'A contact with this id already exists'
+      if (state.contactIds.includes(contactId)) {
+        //state.message = 'A contact with this id already exists'
+        state.shooters++
       } else {
         state.contacts[contactId] = contactFlattened
         state.contactIds = [...state.contactIds, contactId].sort()
@@ -38,12 +40,16 @@ const contactsSlice = createSlice({
     setContactsMessage: (state, action) => {
       state.message = action.payload.message
     },
-    clearContacsMessage: (state) => {
+    clearContactsMessage: (state) => {
       state.message = ''
     },
   },
 })
 
-export const { addContacts, addContact, setContactsMessage } =
-  contactsSlice.actions
+export const {
+  addContacts,
+  addContact,
+  setContactsMessage,
+  clearContactsMessage,
+} = contactsSlice.actions
 export default contactsSlice.reducer
