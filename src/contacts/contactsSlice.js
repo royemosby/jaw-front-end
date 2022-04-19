@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { zeroPad } from '../utilityFunctions/zeroPad'
 
 const initialState = {
-  contacts: [],
+  contacts: {},
+  contactIds: [],
   message: '',
 }
 
@@ -11,18 +13,33 @@ const contactsSlice = createSlice({
   reducers: {
     addContacts(state, action) {
       const contactsFlattened = action.payload.data.map((contact) => {
-        const contactFlattened = Object.assign({}, contact.attributes, {
-          jobs: contact.relationships.jobs.data,
+        const contactFlattened = Object.assign({}, contact.attributes)
+        contactFlattened.jobIds = contact.relationships.jobs.data.map((j) => {
+          return `job${zeroPad(j.id)}`
         })
         return contactFlattened
       })
-      state.contacts = contactsFlattened
+      contactsFlattened.forEach((c) => {
+        const contactId = `contact${zeroPad(c.id)}`
+        state.contacts[contactId] = c
+        state.contactIds.push(contactId)
+      })
     },
     addContact(state, action) {
-      state.contacts.push(action.payload)
+      const contactFlattened = action.payload.data.attributes
+      const contactId = `contact${zeroPad(contactFlattened.id)}`
+      if (state.contactIds.include(contactId)) {
+        state.message = 'A contact with this id already exists'
+      } else {
+        state.contacts[contactId] = contactFlattened
+        state.contactIds = [...state.contactIds, contactId].sort()
+      }
     },
     setContactsMessage: (state, action) => {
       state.message = action.payload.message
+    },
+    clearContacsMessage: (state) => {
+      state.message = ''
     },
   },
 })
