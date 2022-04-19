@@ -1,8 +1,12 @@
 import { Card } from '../common/Card'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import placeholder from '../contact.svg'
-
 import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
+import { useEffect } from 'react'
+//url name collision w/contact.url
+import { url as fetchUrl, getConfig } from '../adapters/config'
+import { unpad } from '../utilityFunctions/unpad'
+import { addJob, setJobsMessage } from '../jobs/jobsSlice'
 
 export function ContactCard({
   first_name,
@@ -16,13 +20,48 @@ export function ContactCard({
   updated_at,
 }) {
   const storeJobs = useSelector((state) => state.jobs.jobs)
+  const storeJobIds = useSelector((state) => state.jobs.jobIds)
+  const storeJobsMessage = useSelector((state) => state.jobs.message)
+  const jwt = useSelector((state) => state.user.jwt)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    //if jobIds exist
+    if (jobIds) {
+      jobIds.forEach((id) => {
+        if (!storeJobs[id]) {
+          fetch(`${fetchUrl.jobs}/${unpad(id)}`, getConfig(jwt))
+            .then((resp) => resp.json())
+            .then((resp) => {
+              if (resp.message) {
+                dispatch(setJobsMessage(resp))
+              } else {
+                dispatch(addJob(resp))
+              }
+            })
+        }
+      })
+    }
+    //forEach id
+    //if !storeJobs[id]
+    //fetch store(:id)
+    //if message, dispatch setJobsMessage(resp)
+    //else dispach addJob(resp)
+  }, [])
 
   const contactJobs = () => {
-    if (jobIds.length > 0) {
+    if (jobIds && jobIds.length > 0) {
       return (
-        <div className="border-2 border-slate-500 rounded-sm p-0.5 m-0.5 bg-slate-900/25 max-w-5xl">
-          <h1>You have some jobs to contend with yo</h1>
-          <h2>TITLE with COMPANY (Status: STATUS)</h2>
+        <div className="border-2 border-slate-500 rounded-sm p-0.5 m-0.5 bg-slate-900/25 max-w-5xl text-left">
+          <h1>Jobs</h1>
+          {jobIds.map((id) => {
+            return (
+              <h2>
+                {storeJobs[id].title} with {storeJobs[id].company}
+                {` (Status:${storeJobs[id].status})`}
+              </h2>
+            )
+          })}
         </div>
       )
     }
