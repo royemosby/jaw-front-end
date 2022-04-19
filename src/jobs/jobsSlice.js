@@ -5,6 +5,7 @@ const initialState = {
   jobs: {},
   jobIds: [],
   message: '',
+  shooters: 0,
 }
 
 const jobsSlice = createSlice({
@@ -16,18 +17,23 @@ const jobsSlice = createSlice({
         return Object.assign({}, job.attributes)
       })
       jobsFlattened.forEach((j) => {
-        //TODO: same string to contactId
         const jobId = `job${zeroPad(j.id)}`
+        if (j.contact_id) {
+          j.contact_id = `contact${zeroPad(j.contact_id)}`
+        }
         state.jobs[jobId] = j
         state.jobIds.push(jobId)
       })
     },
     addJob: (state, action) => {
       const jobFlattened = action.payload.data.attributes
-      //TODO: same string to contactId
+      if (jobFlattened.contact_id) {
+        jobFlattened.contact_id = `contact${zeroPad(jobFlattened.contact_id)}`
+      }
       const jobId = `job${zeroPad(jobFlattened.id)}`
       if (state.jobIds.includes(jobId)) {
-        state.message = 'A job with this id already exists.'
+        //state.message = 'A job with this id already exists.'
+        state.shooters++
       } else {
         state.jobs[jobId] = jobFlattened
         state.jobIds = [...state.jobIds, jobId].sort()
