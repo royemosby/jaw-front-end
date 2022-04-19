@@ -8,15 +8,14 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 ### Up next
 
-- Normalize redux stores to assist in relational retrieval
-  - [ ] Jobs
-  - [ ] Contacts
-  - [ ] Redo components reliant on Job
-  - [ ] Redo components reliant on Contact
-- Load contact store if empty on login
-- Load job store if empty on login
-- Load contacts
-  - Link contact's jobs to jobDetails
+- [x] Load Jobs
+  - [x] Load related contact info (already in store)
+  - [x] Load related contact info (/contacts/:contact_id)
+  - [ ] Link to contactDetails
+- [x] Load contacts
+  - [x] Load related jobs info (already in store)
+  - [x] Load related jobs info (/jobs/:job_id)
+  - [ ] Link contact's jobs to jobDetails
 - Job create form
   - Contact picker
   - Inline contact creator
@@ -27,6 +26,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 - Active/hover state styles
 - Link indicator on card
 - Convert not logged in catchall route to redirect
+- Contact jobs styling.
 
 ### Big picture
 
