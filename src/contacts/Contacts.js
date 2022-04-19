@@ -2,7 +2,11 @@ import { ContactCard } from './ContactCard'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { url, getConfig } from '../adapters/config'
-import { addContacts, setContactsMessage } from './contactsSlice'
+import {
+  addContacts,
+  setContactsMessage,
+  clearContactsMessage,
+} from './contactsSlice'
 
 export function Contacts() {
   const contacts = useSelector((state) => state.contacts.contacts)
@@ -12,6 +16,7 @@ export function Contacts() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(clearContactsMessage)
     fetch(url.contacts, getConfig(jwt))
       .then((resp) => resp.json())
       .then((resp) => {
