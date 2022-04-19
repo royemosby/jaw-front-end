@@ -2,7 +2,7 @@ import { JobCard } from './JobCard'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { url, getConfig } from '../adapters/config'
-import { addJobs, setJobsMessage } from '../jobs/jobsSlice'
+import { addJob, addJobs, setJobsMessage } from '../jobs/jobsSlice'
 
 export function Jobs() {
   const jobs = useSelector((state) => state.jobs.jobs)

@@ -15,7 +15,7 @@ const jobsSlice = createSlice({
       })
       state.jobs = jobsFlattened
     },
-    createJob: (state, action) => {
+    addJob: (state, action) => {
       state.jobs.push(action.payload.data)
     },
     setJobsMessage: (state, action) => {
@@ -24,5 +24,5 @@ const jobsSlice = createSlice({
   },
 })
 
-export const { addJobs, createJob, setJobsMessage } = jobsSlice.actions
+export const { addJobs, addJob, setJobsMessage } = jobsSlice.actions
 export default jobsSlice.reducer
