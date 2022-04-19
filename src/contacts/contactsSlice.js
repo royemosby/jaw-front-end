@@ -18,7 +18,7 @@ const contactsSlice = createSlice({
       })
       state.contacts = contactsFlattened
     },
-    createContact(state, action) {
+    addContact(state, action) {
       state.contacts.push(action.payload)
     },
     setContactsMessage: (state, action) => {
@@ -27,6 +27,6 @@ const contactsSlice = createSlice({
   },
 })
 
-export const { addContacts, createContact, setContactsMessage } =
+export const { addContacts, addContact, setContactsMessage } =
   contactsSlice.actions
 export default contactsSlice.reducer
