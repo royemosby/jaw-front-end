@@ -6,6 +6,7 @@ import { addJob, addJobs, setJobsMessage } from '../jobs/jobsSlice'
 
 export function Jobs() {
   const jobs = useSelector((state) => state.jobs.jobs)
+  const jobIds = useSelector((state) => state.jobs.jobIds)
   const message = useSelector((state) => state.jobs.message)
   const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
@@ -26,7 +27,8 @@ export function Jobs() {
     if (message) {
       return <h1>{message}</h1>
     } else {
-      return jobs.map((job, id) => <JobCard {...job} key={id} />)
+      return jobIds.map((jobId, id) => <JobCard {...jobs[jobId]} key={id} />)
+      //return jobs.map((job, id) => <JobCard {...job} key={id} />)
     }
   }
   return <div className="">{mapJobs()}</div>
