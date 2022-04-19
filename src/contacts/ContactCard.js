@@ -11,25 +11,18 @@ export function ContactCard({
   email,
   url,
   phone,
-  jobs,
+  jobIds,
   id,
   updated_at,
 }) {
   const storeJobs = useSelector((state) => state.jobs.jobs)
 
   const contactJobs = () => {
-    if (jobs.length > 0) {
-      const matchingJobs = storeJobs.filter(
-        (j) => j.contact_id === parseInt(id)
-      )
+    if (jobIds.length > 0) {
       return (
         <div className="border-2 border-slate-500 rounded-sm p-0.5 m-0.5 bg-slate-900/25 max-w-5xl">
-          <h1>Jobs Associated with {first_name}</h1>
-          {matchingJobs.map((j, i) => (
-            <h2 key={i}>
-              {j.title} with {j.company} (Status: {j.status})
-            </h2>
-          ))}
+          <h1>You have some jobs to contend with yo</h1>
+          <h2>TITLE with COMPANY (Status: STATUS)</h2>
         </div>
       )
     }

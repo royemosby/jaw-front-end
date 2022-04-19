@@ -2,6 +2,7 @@ import { Card } from '../common/Card'
 import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 import placeholder from '../honey.svg'
 import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 export function JobCard({
   company,
@@ -17,20 +18,10 @@ export function JobCard({
   title,
 }) {
   const storeContacts = useSelector((state) => state.contacts.contacts)
+
   const jobContact = () => {
     if (contact_id) {
-      const matchingContact = storeContacts.find((c) => c.id === contact_id)
-      return (
-        <p className="text-left">
-          {matchingContact.first_name} {matchingContact.last_name}
-          <span> | </span>
-          <a href={`mailto:${matchingContact.email}`}>
-            {matchingContact.email}
-          </a>
-          <span> | </span>
-          <a href={`tel:${matchingContact.phone}`}>{matchingContact.phone}</a>
-        </p>
-      )
+      return <p>There's a contact to deal with yo</p>
     }
   }
   return (
