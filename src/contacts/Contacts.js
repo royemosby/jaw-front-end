@@ -31,11 +31,8 @@ export function Contacts() {
     if (message) {
       return <h1>{message}</h1>
     } else {
-      // return contacts.map((contact, id) => (
-      //   <ContactCard {...contact} key={id} />
-      // ))
       return contactIds.map((contactId, id) => (
-        <ContactCard {...contacts[contactId]} />
+        <ContactCard {...contacts[contactId]} key={id} />
       ))
     }
   }
