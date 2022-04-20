@@ -1,7 +1,18 @@
 import { DetailsButtons } from '../common/buttons/DetailsButtons'
 import { JobCard } from '../jobs/JobCard'
 
-export function ContactDetails() {
+export function ContactDetails({
+  id,
+  first_name,
+  last_name,
+  contact_type,
+  email,
+  url,
+  phone,
+  jobIds,
+  updated_at,
+  contactId,
+}) {
   return (
     <div className="bg-slate-900/25 min-h-cover">
       <div className="text-left p-2 shadow-cover-divider bg-slate-900/50 flex justify-between	">
@@ -30,9 +41,11 @@ export function ContactDetails() {
           <summary>Notes</summary>
           <div>
             <p>
-              Laborum ipsum cupidatat velit aute. Ad cupidatat eu et laboris anim in sit ad do laboris Lorem amet ea.
-              Esse Lorem ullamco consectetur commodo commodo aliquip veniam reprehenderit eu laborum sunt veniam sint
-              consequat. Pariatur aliquip excepteur eu irure anim. Excepteur ea deserunt voluptate velit laboris Lorem
+              Laborum ipsum cupidatat velit aute. Ad cupidatat eu et laboris
+              anim in sit ad do laboris Lorem amet ea. Esse Lorem ullamco
+              consectetur commodo commodo aliquip veniam reprehenderit eu
+              laborum sunt veniam sint consequat. Pariatur aliquip excepteur eu
+              irure anim. Excepteur ea deserunt voluptate velit laboris Lorem
               magna voluptate nulla qui exercitation veniam labore.
             </p>
           </div>
