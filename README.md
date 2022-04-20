@@ -15,7 +15,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 - [x] Load contacts
   - [x] Load related jobs info (already in store)
   - [x] Load related jobs info (/jobs/:job_id)
-  - [ ] Link contact's jobs to jobDetails
+  - [ ] Link jobDetails
 - Job create form
   - Contact picker
   - Inline contact creator
@@ -27,6 +27,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 - Link indicator on card
 - Convert not logged in catchall route to redirect
 - Contact jobs styling.
+- Remove default un/pw from login state
 
 ### Big picture
 
