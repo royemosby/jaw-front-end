@@ -24,6 +24,7 @@ const mainStyles =
 
 //TODO: fix routes needing :id
 function App() {
+  const contacts = useSelector((state) => state.contacts)
   const user = useSelector((state) => state.user)
   const protectedRoutes = () => {
     if (user.jwt) {
@@ -33,9 +34,9 @@ function App() {
           <Route path="contacts" element={<Contacts />}></Route>
           <Route path="contacts/:contactId" element={<ContactDetails />} />
           <Route path="contacts/new" element={<NewContact />} />
-          <Route path="contacts/edit" element={<EditContact />} />
+          <Route path="contacts/:contactId/edit" element={<EditContact />} />
           <Route path="user" element={<User />} />
-          <Route path="user/edit" element={<EditUser />} />
+          <Route path="user/:userId/edit" element={<EditUser />} />
           <Route path="jobs" element={<Jobs />} />
           <Route path="jobs/edit" element={<EditJob />} />
           <Route path="jobs/new" element={<NewJob />} />
