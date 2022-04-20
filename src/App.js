@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
+import './App.css'
 import { Contacts } from './contacts/Contacts'
 import { NewContact } from './contacts/NewContact'
 import { EditContact } from './contacts/EditContact'
@@ -13,8 +15,7 @@ import { NewUser } from './user/NewUser'
 import { EditUser } from './user/EditUser'
 import { NotFound } from './common/NotFound'
 import { User } from './user/User'
-import './App.css'
-import { useSelector } from 'react-redux'
+import { ContactDetails } from './contacts/ContactDetails'
 
 const wrapperStyles =
   'min-h-screen grid justify-center text-slate-100 content-between p-1'
@@ -29,14 +30,15 @@ function App() {
       return (
         <>
           <Route index element={<Jobs />} />
-          <Route path="/contacts" element={<Contacts />} />
-          <Route path="/contacts/new" element={<NewContact />} />
-          <Route path="/contacts/edit" element={<EditContact />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/user/edit" element={<EditUser />} />
-          <Route path="/jobs" element={<Jobs />} />
-          <Route path="/jobs/edit" element={<EditJob />} />
-          <Route path="/jobs/new" element={<NewJob />} />
+          <Route path="contacts" element={<Contacts />}></Route>
+          <Route path="contacts/:contactId" element={<ContactDetails />} />
+          <Route path="contacts/new" element={<NewContact />} />
+          <Route path="contacts/edit" element={<EditContact />} />
+          <Route path="user" element={<User />} />
+          <Route path="user/edit" element={<EditUser />} />
+          <Route path="jobs" element={<Jobs />} />
+          <Route path="jobs/edit" element={<EditJob />} />
+          <Route path="jobs/new" element={<NewJob />} />
           <Route path="*" element={<NotFound />} />
         </>
       )
