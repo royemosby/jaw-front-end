@@ -18,6 +18,7 @@ export function ContactCard({
   jobIds,
   id,
   updated_at,
+  contactId,
 }) {
   const storeJobs = useSelector((state) => state.jobs.jobs)
   const storeJobIds = useSelector((state) => state.jobs.jobIds)
@@ -26,7 +27,6 @@ export function ContactCard({
   const dispatch = useDispatch()
 
   useEffect(() => {
-    //if jobIds exist
     if (jobIds) {
       jobIds.forEach((id) => {
         if (!storeJobs[id]) {
@@ -42,11 +42,6 @@ export function ContactCard({
         }
       })
     }
-    //forEach id
-    //if !storeJobs[id]
-    //fetch store(:id)
-    //if message, dispatch setJobsMessage(resp)
-    //else dispach addJob(resp)
   }, [])
 
   const contactJobs = () => {
@@ -55,12 +50,16 @@ export function ContactCard({
         <div className="border-2 border-slate-500 rounded-sm p-0.5 m-0.5 bg-slate-900/25 max-w-5xl text-left">
           <h1>Jobs</h1>
           {jobIds.map((id) => {
-            return (
-              <h2>
-                {storeJobs[id].title} with {storeJobs[id].company}
-                {` (Status:${storeJobs[id].status})`}
-              </h2>
-            )
+            if (storeJobs[id]) {
+              return (
+                <h2 key={id}>
+                  {storeJobs[id].title} with {storeJobs[id].company}
+                  {` (Status:${storeJobs[id].status})`}
+                </h2>
+              )
+            } else {
+              return <h2 key={id}>Job not Found</h2>
+            }
           })}
         </div>
       )
