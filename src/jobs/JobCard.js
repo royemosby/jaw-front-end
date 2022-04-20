@@ -55,8 +55,11 @@ export function JobCard({
       return <p className="text-left">Contact not found</p>
     }
   }
+
+  const handleOpen = () => console.log(`Open job: ${jobId}`)
+  const handleEdit = () => console.log(`Edit job: ${jobId}`)
   return (
-    <Card>
+    <Card openAction={handleOpen} editAction={handleEdit}>
       <ConditionalLinkWrapper link={posting_url} condition={!!posting_url}>
         <div className="flex">
           <div className="h-16 m-0.5">

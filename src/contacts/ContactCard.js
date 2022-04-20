@@ -66,8 +66,11 @@ export function ContactCard({
     }
   }
 
+  const handleOpen = () => console.log(`Open contact: ${contactId}`)
+  const handleEdit = () => console.log(`Edit contact: ${contactId}`)
+
   return (
-    <Card>
+    <Card openAction={handleOpen} editAction={handleEdit}>
       <div className="flex">
         <div className="h-16 m-0 5">
           <img src={placeholder} alt="contact icon" className="h-full" />
