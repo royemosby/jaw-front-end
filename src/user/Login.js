@@ -7,8 +7,9 @@ import { url, authConfig } from '../adapters/config'
 import { setUser, setUserMessage } from '../user/userSlice'
 
 export function Login() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  //TODO: clear out default prop state after dev
+  const [username, setUsername] = useState('test')
+  const [password, setPassword] = useState('test')
 
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch()
