@@ -1,10 +1,10 @@
 import { Button } from './Button'
 
-export function CardButtons() {
+export function CardButtons({ openAction, editAction }) {
   return (
     <div className="flex">
-      <Button text="Open"></Button>
-      <Button text="Edit"></Button>
+      <Button text="Open" action={openAction}></Button>
+      <Button text="Edit" action={editAction}></Button>
     </div>
   )
 }
