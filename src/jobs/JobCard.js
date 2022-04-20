@@ -19,6 +19,7 @@ export function JobCard({
   posting_url,
   status,
   title,
+  jobId,
 }) {
   const storeContacts = useSelector((state) => state.contacts.contacts)
   const storeContactIds = useSelector((state) => state.contacts.contactIds)
