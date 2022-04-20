@@ -15,6 +15,7 @@ const contactsSlice = createSlice({
     addContacts(state, action) {
       const contactsFlattened = action.payload.data.map((contact) => {
         const contactFlattened = Object.assign({}, contact.attributes)
+        contactFlattened.contactId = `contact${zeroPad(contact.id)}`
         contactFlattened.jobIds = contact.relationships.jobs.data.map((j) => {
           return `job${zeroPad(j.id)}`
         })
@@ -29,6 +30,7 @@ const contactsSlice = createSlice({
     addContact(state, action) {
       const contactFlattened = action.payload.data.attributes
       const contactId = `contact${zeroPad(contactFlattened.id)}`
+      contactFlattened['contactId'] = `contact${zeroPad(contactFlattened.id)}`
       if (state.contactIds.includes(contactId)) {
         //state.message = 'A contact with this id already exists'
         state.shooters++

@@ -18,6 +18,7 @@ const jobsSlice = createSlice({
       })
       jobsFlattened.forEach((j) => {
         const jobId = `job${zeroPad(j.id)}`
+        j['jobId'] = jobId
         if (j.contact_id) {
           j.contact_id = `contact${zeroPad(j.contact_id)}`
         }
@@ -31,6 +32,7 @@ const jobsSlice = createSlice({
         jobFlattened.contact_id = `contact${zeroPad(jobFlattened.contact_id)}`
       }
       const jobId = `job${zeroPad(jobFlattened.id)}`
+      jobFlattened['jobId'] = jobId
       if (state.jobIds.includes(jobId)) {
         //state.message = 'A job with this id already exists.'
         state.shooters++
