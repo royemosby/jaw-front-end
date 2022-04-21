@@ -2,29 +2,30 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import './App.css'
+import { Header } from './common/Header'
+import { Footer } from './common/Footer'
 import { Contacts } from './contacts/Contacts'
+import { ContactDetails } from './contacts/ContactDetails'
 import { NewContact } from './contacts/NewContact'
 import { EditContact } from './contacts/EditContact'
-import { Footer } from './common/Footer'
-import { Header } from './common/Header'
 import { Jobs } from './jobs/Jobs'
+import { JobDetails } from './jobs/JobDetails'
 import { NewJob } from './jobs/NewJob'
 import { EditJob } from './jobs/EditJob'
 import { Login } from './user/Login'
-import { NewUser } from './user/NewUser'
-import { EditUser } from './user/EditUser'
-import { NotFound } from './common/NotFound'
 import { User } from './user/User'
-import { ContactDetails } from './contacts/ContactDetails'
+import { EditUser } from './user/EditUser'
+import { NewUser } from './user/NewUser'
+import { NotFound } from './common/NotFound'
 
 const wrapperStyles =
   'min-h-screen grid justify-center text-slate-100 content-between p-1'
 const mainStyles =
   'm-auto text-center max-w-6xl	flex flex-col items-stretch h-full border-2 border-slate-600 shadow-cover p-2'
 
-//TODO: fix routes needing :id
 function App() {
-  const contacts = useSelector((state) => state.contacts)
+  const contacts = useSelector((state) => state.contacts.contacts)
+  const jobs = useSelector((state) => state.jobs.jobs)
   const user = useSelector((state) => state.user)
   const protectedRoutes = () => {
     if (user.jwt) {
@@ -38,7 +39,8 @@ function App() {
           <Route path="user" element={<User />} />
           <Route path="user/:userId/edit" element={<EditUser />} />
           <Route path="jobs" element={<Jobs />} />
-          <Route path="jobs/edit" element={<EditJob />} />
+          <Route path="jobs/:jobId" element={JobDetails} />
+          <Route path="jobs/:jobId/edit" element={<EditJob />} />
           <Route path="jobs/new" element={<NewJob />} />
           <Route path="*" element={<NotFound />} />
         </>
