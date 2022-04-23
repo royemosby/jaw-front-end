@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import './App.css'
@@ -39,7 +44,7 @@ function App() {
           <Route path="user" element={<User />} />
           <Route path="user/:userId/edit" element={<EditUser />} />
           <Route path="jobs" element={<Jobs />} />
-          <Route path="jobs/:jobId" element={JobDetails} />
+          <Route path="jobs/:jobId" element={<JobDetails />} />
           <Route path="jobs/:jobId/edit" element={<EditJob />} />
           <Route path="jobs/new" element={<NewJob />} />
           <Route path="*" element={<NotFound />} />
@@ -49,7 +54,7 @@ function App() {
       return (
         <>
           <Route index element={<Login />} />
-          <Route path="*" element={<Login />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
         </>
       )
     }
