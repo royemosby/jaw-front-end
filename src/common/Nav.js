@@ -12,17 +12,17 @@ export function Nav() {
           <Link to="/" className={styles}>
             Jobs
           </Link>
+          <Link to="/jobs/new" className={styles}>
+            New Job
+          </Link>
           <Link to="/contacts" className={styles}>
             Contacts
           </Link>
           <Link to="/user" className={styles}>
             User
           </Link>
-          <Link to="/x" className={styles}>
-            _New Contact
-          </Link>
-          <Link to="/y" className={styles}>
-            _Edit Contact
+          <Link to="/contacts/new" className={styles}>
+            New Contact
           </Link>
         </>
       )
