@@ -1,11 +1,12 @@
 import { Button } from './Button'
 
-export function UpdateButtons() {
+//TODO: rename to editFormButtons
+export function UpdateButtons({ handleSubmit, handleDelete, handleCancel }) {
   return (
-    <div className="flex">
-      <Button text="Update"></Button>
-      <Button text="Cancel"></Button>
-      <Button text="Delete"></Button>
+    <div className="flex col-span-2">
+      <Button text="Update" action={handleSubmit}></Button>
+      <Button text="Cancel" action={handleCancel}></Button>
+      <Button text="Delete" action={handleDelete}></Button>
     </div>
   )
 }
