@@ -1,81 +1,86 @@
 import placeholder from '../honey.svg'
 import { DetailsButtons } from '../common/buttons/DetailsButtons'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { ContactInfoFragment } from './contactInfoFragment'
+import { ContactNotesFragment } from './contactNotesFragment'
 
 export function JobDetails() {
+  const { jobId } = useParams()
+  const {
+    title,
+    job_type,
+    company,
+    location,
+    is_remote,
+    status,
+    posting_url,
+    logo_url,
+    date_posted,
+    date_applied,
+    description,
+    updated_at,
+    contact_id,
+    notes,
+  } = useSelector((state) => state.jobs.jobs[jobId])
+
   return (
     <div className="bg-slate-900/25 min-h-cover ">
       <header className="flex shadow-cover-divider p-1 mb-2 bg-slate-900/50 items-center">
         <div className="h-16 m-0.5">
-          <img src={placeholder} alt="" className="h-full" />
+          <img
+            src={logo_url ? logo_url : placeholder}
+            alt=""
+            className="h-full"
+          />
         </div>
         <div className="text-left grow">
-          <h2 className="text-left">Job title | Job type</h2>
-          <h3 className="text-left">Contact company</h3>
+          <h2 className="text-left">
+            {title} | {job_type}
+          </h2>
+          <h3 className="text-left">{company}</h3>
         </div>
-        <div>
-          <p>New York, NY | Hybrid</p>
-          <p>Last Update: 3/7/2022</p>
+        <div className="text-right">
+          <p>
+            {location} | {is_remote}
+          </p>
+          <p>
+            Last Update: {updated_at.time} {updated_at.date}
+          </p>
         </div>
       </header>
       <div className="flex justify-between p-2">
-        <p>Open: 3/4/2022</p>
-        <p>Applied: 3/5/2022</p>
-        <p>Status: Applied</p>
+        <p>Open: {date_posted}</p>
+        {date_applied ? `<p>Applied: ${date_applied}</p>` : ''}
+        <p>Status: {status}</p>
       </div>
       <div className="text-left p-2 shadow-cover-divider">
-        <h2>Contact: Alexa Johnston</h2>
+        {contact_id ? (
+          <ContactInfoFragment contact_id={contact_id} />
+        ) : (
+          <h2>No contact for this job</h2>
+        )}
         <p className="mb-4">
-          <a href="mailto:ajohnston@recruitz.io">ajohnston@recruitz.io</a>
-          <span> | </span>
-          <a href="tel:702-263-9744">702-263-9744</a>
+          <a href={posting_url}>Posting/Company Link</a>
         </p>
-        <p className="mb-4">
-          <a href="#">Posting/Company URL</a>
-        </p>
-        <details>
-          <summary>Contact notes</summary>
-          <p>
-            Ex ipsum voluptate proident est incididunt in. Ullamco in dolore ad enim et nostrud Lorem esse officia ea.
-            Minim elit nisi qui ex fugiat tempor reprehenderit aute consectetur minim fugiat ipsum irure. Sunt ex ea id
-            laborum sunt velit nulla ea esse fugiat excepteur amet reprehenderit. Dolor voluptate do velit ad tempor
-            consequat voluptate cillum magna veniam. Mollit nisi excepteur nostrud ut. Velit labore reprehenderit
-            reprehenderit duis ad sunt in sit laboris.
-          </p>
-        </details>
+        {contact_id ? <ContactNotesFragment contact_id={contact_id} /> : null}
       </div>
       <hr className="border-slate-600" />
       <div className="p-2 shadow-cover-divider text-left">
         <details open>
-          <summary>Description</summary>
-          <p>
-            Excepteur minim est veniam sint sunt dolore aliquip voluptate non ut est aliqua. Culpa aliquip velit
-            adipisicing sunt. Nostrud deserunt esse qui velit duis do in qui sunt esse tempor. Tempor aliquip commodo
-            nisi aliqua dolore labore. Nulla voluptate qui magna elit tempor. Culpa adipisicing nisi commodo aliquip eu
-            mollit eu deserunt.
-          </p>
-          <p>
-            Excepteur minim est veniam sint sunt dolore aliquip voluptate non ut est aliqua. Culpa aliquip velit
-            adipisicing sunt. Nostrud deserunt esse qui velit duis do in qui sunt esse tempor. Tempor aliquip commodo
-            nisi aliqua dolore labore. Nulla voluptate qui magna elit tempor. Culpa adipisicing nisi commodo aliquip eu
-            mollit eu deserunt.
-          </p>
+          <summary>Position Description</summary>
+          <p>{description}</p>
         </details>
       </div>
       <hr className="border-slate-600" />
       <div className="p-2 shadow-cover-divider text-left">
         <details open>
           <summary>Notes</summary>
-          <p>
-            Ex ipsum voluptate proident est incididunt in. Ullamco in dolore ad enim et nostrud Lorem esse officia ea.
-            Minim elit nisi qui ex fugiat tempor reprehenderit aute consectetur minim fugiat ipsum irure. Sunt ex ea id
-            laborum sunt velit nulla ea esse fugiat excepteur amet reprehenderit. Dolor voluptate do velit ad tempor
-            consequat voluptate cillum magna veniam. Mollit nisi excepteur nostrud ut. Velit labore reprehenderit
-            reprehenderit duis ad sunt in sit laboris.
-          </p>
+          {notes}
         </details>
       </div>
       <hr className="border-slate-600" />
-      <DetailsButtons />
+      <DetailsButtons route="jobs" resourceId={jobId} />
     </div>
   )
 }
