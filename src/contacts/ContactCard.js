@@ -70,7 +70,7 @@ export function ContactCard({
   const handleEdit = () => console.log(`Edit contact: ${contactId}`)
 
   return (
-    <Card openAction={handleOpen} editAction={handleEdit}>
+    <Card resourceId={contactId} route="contacts">
       <div className="flex">
         <div className="h-16 m-0 5">
           <img src={placeholder} alt="contact icon" className="h-full" />
