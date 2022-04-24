@@ -28,7 +28,6 @@ export function Jobs() {
       return <h1>{message}</h1>
     } else {
       return jobIds.map((jobId, id) => <JobCard {...jobs[jobId]} key={id} />)
-      //return jobs.map((job, id) => <JobCard {...job} key={id} />)
     }
   }
   return <div className="">{mapJobs()}</div>
