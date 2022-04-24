@@ -1,6 +1,6 @@
 import { TextInput } from '../common/form_inputs/TextInput'
 
-export function ContactForm() {
+export function ContactForm({ contact, children }) {
   return (
     <form action="" className="grid grid-cols-form gap-1">
       <label htmlFor="first_name">First Name</label>
@@ -17,6 +17,7 @@ export function ContactForm() {
       <TextInput name="url" />
       <label htmlFor="notes">Notes</label>
       <textarea name="notes" id="" cols="50" rows="5"></textarea>
+      {children}
     </form>
   )
 }
