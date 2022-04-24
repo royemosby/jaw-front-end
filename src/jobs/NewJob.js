@@ -5,8 +5,9 @@ export function NewJob() {
   return (
     <div>
       <h1>New Job</h1>
-      <JobForm></JobForm>
-      <CreateButtons></CreateButtons>
+      <JobForm>
+        <CreateButtons></CreateButtons>
+      </JobForm>
     </div>
   )
 }
