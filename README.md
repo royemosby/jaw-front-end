@@ -9,6 +9,8 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 ### Up next
 
 - [ ] wire forms
+  - [x] values
+  - [ ] actions
 - [ ] Job create form
   - [ ] Contact picker
   - [ ] Inline contact creator
@@ -32,3 +34,8 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
   - button states
   - required field highlights
 - form errors handling
+
+### Questions
+
+- Access to store outside of component for adapter configs?
+- How to use dialog element properly?
