@@ -19,19 +19,19 @@ export function JobForm({ job, children }) {
 
   useEffect(() => {
     if (job) {
-      setTitle(job.title)
-      setJobType(job.job_type)
-      setCompany(job.company)
-      setLocation(job.location)
-      setIsRemote(job.is_remote)
-      setStatus(job.status)
-      setPostingUrl(job.posting_url)
-      setLogoUrl(job.posting_url)
-      setDatePosted(job.date_posted)
-      setDescription(job.description)
-      setNotes(job.notes)
-      setDateApplied(job.date_applied)
-      setContactId(job.contact_id)
+      setTitle(job.title || '')
+      setJobType(job.job_type || '')
+      setCompany(job.company || '')
+      setLocation(job.location || '')
+      setIsRemote(job.is_remote || '')
+      setStatus(job.status || '')
+      setPostingUrl(job.posting_url || '')
+      setLogoUrl(job.posting_url || '')
+      setDatePosted(job.date_posted || '')
+      setDescription(job.description || '')
+      setNotes(job.notes || '')
+      setDateApplied(job.date_applied || '')
+      setContactId(job.contact_id || '')
     }
   }, [])
 
