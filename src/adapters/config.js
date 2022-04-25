@@ -27,3 +27,38 @@ export function getConfig(jwt) {
     },
   }
 }
+
+export function postConfig(jwt, body = {}) {
+  return {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify(body),
+  }
+}
+
+export function putConfig(jwt, body = {}) {
+  return {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify(body),
+  }
+}
+
+export function deleteConfig(jwt) {
+  return {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+  }
+}
