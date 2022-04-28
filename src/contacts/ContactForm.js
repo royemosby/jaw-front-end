@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { TextInput } from '../common/form_inputs/TextInput'
 
 export function ContactForm({ contact, children }) {
   const [first_name, setFirstName] = useState('')
