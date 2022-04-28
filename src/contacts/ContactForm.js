@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export function ContactForm({ contact, children }) {
+export function ContactForm({ contact, children, handleSubmit }) {
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
   const [contact_type, setContactType] = useState('')
@@ -21,8 +21,23 @@ export function ContactForm({ contact, children }) {
     }
   }, [])
 
+  const submit = (e) => {
+    return handleSubmit({
+      event: e,
+      newContact: {
+        first_name,
+        last_name,
+        contact_type,
+        email,
+        phone,
+        url,
+        notes,
+      },
+    })
+  }
+
   return (
-    <form action="" className="grid grid-cols-form gap-1">
+    <form onSubmit={(e) => submit(e)} className="grid grid-cols-form gap-1">
       <label htmlFor="first_name">First Name</label>
       <input
         type="text"
