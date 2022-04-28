@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { DeleteDialog } from '../common/DeleteDialog'
 import { useState } from 'react'
+import { deleteConfig, putConfig } from '../adapters/config'
 
 export function EditContact() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
