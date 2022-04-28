@@ -20,9 +20,9 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 - Change date formats from xxxx-xx-xx to xx/xx/xxxx
 - Active/hover state styles
 - Link indicator on card
-- block useEffect fetches when resource fully loaded
-- Convert not logged in catchall route to redirect
-- Contact jobs styling.
+- [x] block useEffect fetches when resource fully loaded. Done by empty [] as second param
+- [x] Convert not logged in catchall route to redirect
+- [x] Contact jobs styling.
 - Remove default un/pw from login state
 - Refine close button on contact->job->jobDetails (goes to jobs index instead of back)
 
