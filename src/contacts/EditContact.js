@@ -24,8 +24,9 @@ export function EditContact() {
     setDialogIsOpen(false)
   }
 
-  const handleSubmit = () => {
-    console.log('contact submitted')
+  const handleSubmit = ({ event, newContact }) => {
+    console.log(JSON.stringify(newContact))
+    event.preventDefault()
   }
   const handleDelete = () => {
     setDialogIsOpen(true)
@@ -33,11 +34,11 @@ export function EditContact() {
   return (
     <div className="relative">
       <h1>Edit Contact</h1>
-      <ContactForm contact={contact}>
+      <ContactForm contact={contact} handleSubmit={handleSubmit}>
         <UpdateButtons
+          handleSubmit={handleSubmit}
           handleCancel={handleCancel}
           handleDelete={handleDelete}
-          handleSubmit={handleSubmit}
         />
       </ContactForm>
       {dialogIsOpen ? (
