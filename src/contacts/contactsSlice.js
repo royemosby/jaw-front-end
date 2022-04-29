@@ -39,6 +39,11 @@ const contactsSlice = createSlice({
         state.contactIds = [...state.contactIds, contactId].sort()
       }
     },
+    updateContact(state, action) {
+      const contactFlattened = action.payload.data.attributes
+      contactFlattened.contactId = `contact${zeroPad(contactFlattened.id)}`
+      state.contacts[contactFlattened.contactId] = contactFlattened
+    },
     setContactsMessage: (state, action) => {
       state.message = action.payload.message
     },
@@ -53,5 +58,6 @@ export const {
   addContact,
   setContactsMessage,
   clearContactsMessage,
+  updateContact,
 } = contactsSlice.actions
 export default contactsSlice.reducer
