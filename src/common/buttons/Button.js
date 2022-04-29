@@ -6,15 +6,21 @@ export function Button({
   action = () => {
     console.log('Button not wired')
   },
+  disabled = false,
 }) {
+  const disabledStyles = () => {
+    return disabled ? 'text-slate-500 italic' : ''
+  }
   const buttonStyles = () => {
-    return `${styles} ${classProps}`
+    return `${styles} ${classProps} ${disabledStyles()}`
   }
 
   return (
     <button
+      disabled={disabled}
       type="button"
       className={buttonStyles()}
+      title={disabled ? 'This button is disabled' : ''}
       onClick={(evt) => action(evt)}>
       {text}
     </button>
