@@ -6,25 +6,49 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 ## Todo
 
-### Up next
+### Develop
 
-- [ ] wire forms
-  - [x] values
-  - [ ] actions
-- [ ] Job create form
-  - [ ] Contact picker
-  - [ ] Inline contact creator
-- [ ] Contact creator form (modal could be fun)
-- [ ] Contact details new Job button
-- Change is_remote enum to "In person", "Remote", or "Hybrid"
-- Change date formats from xxxx-xx-xx to xx/xx/xxxx
-- Active/hover state styles
-- Link indicator on card
-- [x] block useEffect fetches when resource fully loaded. Done by empty [] as second param
-- [x] Convert not logged in catchall route to redirect
-- [x] Contact jobs styling.
-- Remove default un/pw from login state
-- Refine close button on contact->job->jobDetails (goes to jobs index instead of back)
+- [ ] forms
+  - [x] contact forms
+  - [ ] job forms
+    - [ ] create
+      - [ ] wire
+      - [ ] actions
+      - [ ] contact picker
+      - [ ] contact maker
+    - [ ] edit
+      - [ ] wire
+      - [ ] actions
+      - [ ] disable delete with contact FK
+      - [ ] contact picker
+      - [ ] contact maker
+- [ ] details
+  - [x] contacts
+  - [ ] jobs
+    - [ ] disable delete with contact FK
+- [ ] indices
+  - [x] contacts
+  - [x] jobs
+  - [ ] user
+- [ ] backend updates
+  - [ ] remove fk constraint and remove fk's
+    - [ ] contact
+    - [ ] job
+    - [ ] update front-end state
+  - [ ] Change is_remote enum to "In person", "Remote", or "Hybrid"
+  - [ ] Change contact.url to contact.social_url
+    - [ ] un-alias imported config urls in ContactDetails, ContactCard
+  - [ ] Change date formats from xxxx-xx-xx to xx/xx/xxxx
+
+### Style tweaks
+
+- [ ] Active/hover state styles
+- [ ] Link indicator on card
+- [ ] improve disabled button ux
+
+### QA/QC
+
+- [ ] Remove default un/pw from login stated
 
 ### Big picture
 
@@ -34,6 +58,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
   - button states
   - required field highlights
 - form errors handling
+- state persistence in localStorage
 
 ### Questions
 
