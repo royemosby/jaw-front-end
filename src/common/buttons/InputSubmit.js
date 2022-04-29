@@ -1,12 +1,8 @@
 import { buttonStyles as styles } from './Button'
 
-export function InputSubmit({ submit, text = 'Submit' }) {
+export function InputSubmit({ text = 'Submit' }) {
+  //submit actions happen on the form
   return (
-    <input
-      className={`${styles} cursor-pointer`}
-      type="submit"
-      onSubmit={(e) => submit(e)}
-      value={text}
-    />
+    <input className={`${styles} cursor-pointer`} type="submit" value={text} />
   )
 }
