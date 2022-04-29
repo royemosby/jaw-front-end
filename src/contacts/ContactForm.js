@@ -24,7 +24,7 @@ export function ContactForm({ contact, children, handleSubmit }) {
   const submit = (e) => {
     return handleSubmit({
       event: e,
-      newContact: {
+      submittedContact: {
         first_name,
         last_name,
         contact_type,
