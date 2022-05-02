@@ -22,6 +22,21 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
       - [ ] disable delete with contact FK
       - [ ] contact picker
       - [ ] contact maker
+- [ ] handling validation failures
+  - [ ] jobs
+    - [ ] presence: company, date_posted, is_remote, status, title, job_type,
+    - [ ] is_remote options: yes, no, hybrid
+    - [ ] status options: new, applied, interviewing, offer, accepted, rejected, declined, closed
+    - [ ] job_type options: front-end, back-end, full-stack, other
+    - [ ] description or posting_url url required
+    - [ ] date_applied >= date_posted
+    - [ ] status cannot be new if date_applied used
+  - [ ] contacts
+    - [ ] presence: first_name, last_name, contact_type
+    - [ ] contact_type options: recruiter, personal, peer, manager, employee, flatiron alumni, other
+    - [ ] email matches REGEX
+    - [ ] phone matches REGEX (U.S. only) nnn-nnn-nnnn or (nnn)nnn-nnnn
+  - [ ] contacts
 - [ ] details
   - [x] contacts
   - [ ] jobs
@@ -39,6 +54,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
   - [ ] Change contact.url to contact.social_url
     - [ ] un-alias imported config urls in ContactDetails, ContactCard
   - [ ] Change date formats from xxxx-xx-xx to xx/xx/xxxx
+  - [ ] CORS errors arises from a couple individual resource fetches after server restarted. Does not happen when logged out then log back in. Troubleshoot.
 
 ### Style tweaks
 
