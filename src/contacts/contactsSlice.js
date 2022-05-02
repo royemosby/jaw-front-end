@@ -34,6 +34,10 @@ const contactsSlice = createSlice({
     addContact(state, action) {
       const contactFlattened = action.payload.data.attributes
       const contactId = `contact${zeroPad(contactFlattened.id)}`
+      const jobs = action.payload.data.relationships.jobs.data
+      contactFlattened.jobIds = jobs.map((j) => {
+        return `job${zeroPad(j.id)}`
+      })
       contactFlattened['contactId'] = `contact${zeroPad(contactFlattened.id)}`
       if (state.contactIds.includes(contactId)) {
         state.shooters++
@@ -44,6 +48,10 @@ const contactsSlice = createSlice({
     },
     updateContact(state, action) {
       const contactFlattened = action.payload.data.attributes
+      const jobs = action.payload.data.relationships.jobs.data
+      contactFlattened.jobIds = jobs.map((j) => {
+        return `job${zeroPad(j.id)}`
+      })
       contactFlattened.contactId = `contact${zeroPad(contactFlattened.id)}`
       state.contacts[contactFlattened.contactId] = contactFlattened
     },
