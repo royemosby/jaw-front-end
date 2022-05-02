@@ -40,7 +40,7 @@ const contactsSlice = createSlice({
       })
       contactFlattened['contactId'] = `contact${zeroPad(contactFlattened.id)}`
       if (state.contactIds.includes(contactId)) {
-        state.shooters++
+        state.shooters++ //tallying wasted actions
       } else {
         state.contacts[contactId] = contactFlattened
         state.contactIds = [...state.contactIds, contactId].sort()
@@ -56,6 +56,7 @@ const contactsSlice = createSlice({
       state.contacts[contactFlattened.contactId] = contactFlattened
     },
     deleteContact(state, action) {
+      //TODO: destroy associations
       const contactId = action.payload
       const idx = state.contactIds.indexOf(contactId)
       state.contactIds = [
