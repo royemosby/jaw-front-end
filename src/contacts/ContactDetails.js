@@ -6,7 +6,7 @@ import { DeleteDialog } from '../common/DeleteDialog'
 import { useState } from 'react'
 //url name collision w/contact.url
 import { url as deleteUrl, deleteConfig } from '../adapters/config'
-import { setContactsMessage } from './contactsSlice'
+import { setContactsMessage, deleteContact } from './contactsSlice'
 
 export function ContactDetails() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
@@ -42,6 +42,7 @@ export function ContactDetails() {
   const handleDialogCancel = () => {
     setDialogIsOpen(false)
   }
+  //deleteUrl an alias because 'url' name collision
   const handleDialogConfirm = () => {
     fetch(`${deleteUrl.contacts}/${id}`, deleteConfig(jwt))
       .then((resp) => {
@@ -53,10 +54,11 @@ export function ContactDetails() {
         }
       })
       .then((resp) => {
-        dispatch(setContactsMessage(resp))
+        setDialogIsOpen(false)
         navigate('/contacts')
+        dispatch(setContactsMessage(resp))
+        dispatch(deleteContact(contactId))
       })
-    setDialogIsOpen(false)
   }
   return (
     <div className="bg-slate-900/25 min-h-cover">
