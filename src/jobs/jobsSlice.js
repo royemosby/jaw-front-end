@@ -41,6 +41,15 @@ const jobsSlice = createSlice({
         state.jobIds = [...state.jobIds, jobId].sort()
       }
     },
+    updateJob: (state, action) => {
+      const jobFlattened = action.payload.data.attributes
+      const jobId = `job${zeroPad(jobFlattened.id)}`
+      jobFlattened.jobId = jobId
+      state.jobs[jobId] = jobFlattened
+    },
+    deleteJob: (state, action) => {
+      const jobId = action.payload
+    },
     setJobsMessage: (state, action) => {
       state.message = action.payload.message
     },
@@ -50,5 +59,12 @@ const jobsSlice = createSlice({
   },
 })
 
-export const { addJobs, addJob, setJobsMessage } = jobsSlice.actions
+export const {
+  addJobs,
+  addJob,
+  updateJob,
+  deleteJob,
+  setJobsMessage,
+  clearJobsMessage,
+} = jobsSlice.actions
 export default jobsSlice.reducer
