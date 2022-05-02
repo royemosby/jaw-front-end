@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import { DeleteDialog } from '../common/DeleteDialog'
 import { useState } from 'react'
 import { url, deleteConfig, putConfig } from '../adapters/config'
-import { updateContact, setContactsMessage } from './contactsSlice'
+import {
+  updateContact,
+  deleteContact,
+  setContactsMessage,
+} from './contactsSlice'
 
 export function EditContact() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
@@ -49,16 +53,19 @@ export function EditContact() {
   const handleDialogConfirm = () => {
     fetch(`${url.contacts}/${contact.id}`, deleteConfig(jwt))
       .then((resp) => {
-        console.log(resp.ok, resp.headers)
-        return resp.json()
+        if (resp.ok) {
+          return resp.json()
+        } else {
+          console.log('deletion failed')
+          console.dir(resp.headers)
+        }
       })
       .then((resp) => {
-        if (resp.message) {
-          dispatch(setContactsMessage(resp))
-        }
+        setDialogIsOpen(false)
         navigate('/contacts')
+        dispatch(setContactsMessage(resp))
+        dispatch(deleteContact(contactId))
       })
-    setDialogIsOpen(false)
   }
 
   return (
