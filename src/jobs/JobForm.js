@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 //TODO select or add contact
-export function JobForm({ job, children }) {
+export function JobForm({ job, children, handleSubmit }) {
   const [title, setTitle] = useState('')
   const [job_type, setJobType] = useState('')
   const [company, setCompany] = useState('')
@@ -26,7 +26,7 @@ export function JobForm({ job, children }) {
       setIsRemote(job.is_remote || '')
       setStatus(job.status || '')
       setPostingUrl(job.posting_url || '')
-      setLogoUrl(job.posting_url || '')
+      setLogoUrl(job.logo_url || '')
       setDatePosted(job.date_posted || '')
       setDescription(job.description || '')
       setNotes(job.notes || '')
@@ -35,10 +35,28 @@ export function JobForm({ job, children }) {
     }
   }, [])
 
-  const handleSubmit = () => {}
+  const submit = (e) => {
+    handleSubmit({
+      event: e,
+      submittedJob: {
+        title,
+        job_type,
+        company,
+        location,
+        is_remote,
+        status,
+        posting_url,
+        logo_url,
+        date_posted,
+        description,
+        notes,
+        date_applied,
+      },
+    })
+  }
 
   return (
-    <form action="" className="grid grid-cols-form gap-1">
+    <form onSubmit={(evt) => submit(evt)} className="grid grid-cols-form gap-1">
       <label htmlFor="title">Job Title</label>
       <input
         className="text-black"
