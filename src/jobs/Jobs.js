@@ -1,8 +1,9 @@
 import { JobCard } from './JobCard'
+import { Button } from '../common/buttons/Button'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { url, getConfig } from '../adapters/config'
-import { addJob, addJobs, setJobsMessage } from '../jobs/jobsSlice'
+import { addJobs, setJobsMessage, clearJobsMessage } from '../jobs/jobsSlice'
 
 export function Jobs() {
   const jobs = useSelector((state) => state.jobs.jobs)
@@ -25,10 +26,17 @@ export function Jobs() {
 
   const mapJobs = () => {
     if (message) {
-      return <h1>{message}</h1>
+      return (
+        <div>
+          <h1>{message}</h1>
+          <Button
+            action={(e) => dispatch(clearJobsMessage())}
+            text="Dismiss"></Button>
+        </div>
+      )
     } else {
       return jobIds.map((jobId, id) => <JobCard {...jobs[jobId]} key={id} />)
     }
   }
-  return <div className="">{mapJobs()}</div>
+  return <div>{mapJobs()}</div>
 }
