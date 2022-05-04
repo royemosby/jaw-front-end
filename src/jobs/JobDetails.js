@@ -1,9 +1,13 @@
 import placeholder from '../honey.svg'
 import { DetailsButtons } from '../common/buttons/DetailsButtons'
-import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import { ContactInfoFragment } from './contactInfoFragment'
 import { ContactNotesFragment } from './contactNotesFragment'
+import { url, deleteConfig } from '../adapters/config'
+import { DeleteDialog } from '../common/DeleteDialog'
+import { useState } from 'react'
+import { deleteJob, setJobsMessage } from './jobsSlice'
 
 export function JobDetails() {
   const { jobId } = useParams()
@@ -22,7 +26,46 @@ export function JobDetails() {
     updated_at,
     contact_id,
     notes,
+    id,
   } = useSelector((state) => state.jobs.jobs[jobId])
+
+  const jwt = useSelector((state) => state.user.jwt)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [dialogIsOpen, setDialogIsOpen] = useState(false)
+
+  const handleDelete = () => {
+    setDialogIsOpen(true)
+  }
+  const handleDialogCancel = () => {
+    setDialogIsOpen(false)
+  }
+  const disableDelete = () => {
+    if (contact_id) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  const handleDialogConfirm = () => {
+    fetch(`${url.jobs}/${id}`, deleteConfig(jwt))
+      .then((resp) => {
+        if (resp.ok) {
+          return resp.json()
+        } else {
+          console.log('deletion failed')
+          console.dir(resp.headers)
+        }
+      })
+      .then((resp) => {
+        setDialogIsOpen(false)
+        navigate('/jobs')
+        dispatch(setJobsMessage(resp))
+        dispatch(deleteJob(jobId))
+      })
+  }
 
   return (
     <div className="bg-slate-900/25 min-h-cover ">
@@ -30,7 +73,7 @@ export function JobDetails() {
         <div className="h-16 m-0.5">
           <img
             src={logo_url ? logo_url : placeholder}
-            alt=""
+            alt={`${company} logo`}
             className="h-full"
           />
         </div>
@@ -80,7 +123,20 @@ export function JobDetails() {
         </details>
       </div>
       <hr className="border-slate-600" />
-      <DetailsButtons route="jobs" resourceId={jobId} />
+      <DetailsButtons
+        route="jobs"
+        resourceId={jobId}
+        handleDelete={() => handleDelete()}
+        disabled={disableDelete()}
+      />
+      {dialogIsOpen ? (
+        <DeleteDialog
+          title="Confirm Job Delete"
+          text="This action may not currently work if there are jobs associated with this contact. Removing a job's contact associations is on the todo"
+          cancelHandler={handleDialogCancel}
+          confirmHandler={handleDialogConfirm}
+          isOpen={dialogIsOpen}></DeleteDialog>
+      ) : null}
     </div>
   )
 }
