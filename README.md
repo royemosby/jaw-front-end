@@ -9,7 +9,10 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 ### Develop
 
 - [ ] forms
-  - [x] contact forms
+  - [ ] contact forms
+    - [ ] create
+      - [ ] wire
+      - [ ] actions
   - [ ] job forms
     - [ ] create
       - [ ] wire
@@ -17,9 +20,9 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
       - [ ] contact picker
       - [ ] contact maker
     - [ ] edit
-      - [ ] wire
-      - [ ] actions
-      - [ ] disable delete with contact FK
+      - [x] wire
+      - [x] actions
+      - [x] disable delete with contact FK
       - [ ] contact picker
       - [ ] contact maker
 - [ ] handling validation failures
@@ -37,10 +40,10 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
     - [ ] email matches REGEX
     - [ ] phone matches REGEX (U.S. only) nnn-nnn-nnnn or (nnn)nnn-nnnn
   - [ ] contacts
-- [ ] details
+- [x] details
   - [x] contacts
-  - [ ] jobs
-    - [ ] disable delete with contact FK
+  - [x] jobs
+    - [x] disable delete with contact FK
 - [ ] indices
   - [x] contacts
   - [x] jobs
@@ -69,6 +72,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 ### Big picture
 
 - Add [trix](https://github.com/basecamp/trix) for job.description/notes and contact.notes (or maybe https://lexical.dev/)
+- consider active notes input on details view
 - Keybindings for quick navigation
 - Styling
   - button states
