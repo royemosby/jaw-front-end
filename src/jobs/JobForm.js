@@ -3,12 +3,17 @@ import { useState, useEffect } from 'react'
 
 //TODO select or add contact
 export function JobForm({ job, children, handleSubmit }) {
+  const today = () => {
+    const dateTime = new Date().toISOString()
+    return dateTime.slice(0, dateTime.indexOf('T'))
+  }
+
   const [title, setTitle] = useState('')
   const [job_type, setJobType] = useState('')
   const [company, setCompany] = useState('')
   const [location, setLocation] = useState('')
   const [is_remote, setIsRemote] = useState('')
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState('New')
   const [posting_url, setPostingUrl] = useState('')
   const [logo_url, setLogoUrl] = useState('')
   const [date_posted, setDatePosted] = useState('')
@@ -16,6 +21,7 @@ export function JobForm({ job, children, handleSubmit }) {
   const [notes, setNotes] = useState('')
   const [date_applied, setDateApplied] = useState('')
   const [contact_id, setContactId] = useState('')
+  const [id, setId] = useState('')
 
   useEffect(() => {
     if (job) {
@@ -32,13 +38,16 @@ export function JobForm({ job, children, handleSubmit }) {
       setNotes(job.notes || '')
       setDateApplied(job.date_applied || '')
       setContactId(job.contact_id || '')
+      setId(job.id || '')
+    } else {
+      setDatePosted(today)
     }
   }, [])
 
   const submit = (e) => {
     handleSubmit({
       event: e,
-      submittedJob: {
+      job: {
         title,
         job_type,
         company,
@@ -51,6 +60,7 @@ export function JobForm({ job, children, handleSubmit }) {
         description,
         notes,
         date_applied,
+        id,
       },
     })
   }
@@ -73,6 +83,7 @@ export function JobForm({ job, children, handleSubmit }) {
         id="job_type"
         className="text-black"
         value={job_type}
+        required
         onChange={(e) => setJobType(e.target.value)}>
         <option value="">Select</option>
         <option value="full-stack">Full-stack</option>
@@ -112,6 +123,7 @@ export function JobForm({ job, children, handleSubmit }) {
         id="is_remote"
         className="text-black"
         value={is_remote}
+        required
         onChange={(e) => setIsRemote(e.target.value)}>
         <option value="">Select</option>
         <option value="yes">Yes</option>
