@@ -8,6 +8,7 @@ export function ContactForm({ contact, children, handleSubmit }) {
   const [phone, setPhone] = useState('')
   const [url, setUrl] = useState('')
   const [notes, setNotes] = useState('')
+  const [id, setId] = useState('')
 
   useEffect(() => {
     if (contact) {
@@ -18,13 +19,14 @@ export function ContactForm({ contact, children, handleSubmit }) {
       setPhone(contact.phone || '')
       setUrl(contact.url || '')
       setNotes(contact.notes || '')
+      setId(contact.id || '')
     }
   }, [])
 
   const submit = (e) => {
     return handleSubmit({
       event: e,
-      submittedContact: {
+      contact: {
         first_name,
         last_name,
         contact_type,
@@ -32,6 +34,7 @@ export function ContactForm({ contact, children, handleSubmit }) {
         phone,
         url,
         notes,
+        id,
       },
     })
   }
@@ -45,6 +48,7 @@ export function ContactForm({ contact, children, handleSubmit }) {
         value={first_name}
         onChange={(e) => setFirstName(e.target.value)}
         name="first_name"
+        required
       />
       <label htmlFor="last_name">Last Name</label>
       <input
@@ -53,12 +57,14 @@ export function ContactForm({ contact, children, handleSubmit }) {
         value={last_name}
         onChange={(e) => setLastName(e.target.value)}
         name="last_name"
+        required
       />
       <label htmlFor="contact_type">Type</label>
       <select
         className="text-black"
         value={contact_type}
         onChange={(e) => setContactType(e.target.value)}
+        required
         name="contact_type">
         <option value="">Select</option>
         <option value="recruiter">Recruiter</option>
