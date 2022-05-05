@@ -1,10 +1,11 @@
 import { Button } from './Button'
+import { InputSubmit } from './InputSubmit'
 
-export function CreateButtons() {
+export function CreateButtons({ handleCancel, inputText = 'Submit' }) {
   return (
     <div className=" col-span-2 flex">
-      <Button text="Create"></Button>
-      <Button text="Cancel"></Button>
+      <InputSubmit text={inputText} />
+      <Button text="Cancel" action={handleCancel}></Button>
     </div>
   )
 }
