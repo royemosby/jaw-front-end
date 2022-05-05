@@ -27,9 +27,9 @@ export function EditContact() {
     }
   }
 
-  const handleSubmit = ({ event, submittedContact }) => {
+  const handleSubmit = ({ event, contact }) => {
     event.preventDefault()
-    fetch(`${url.contacts}/${contact.id}`, putConfig(jwt, submittedContact))
+    fetch(`${url.contacts}/${contact.id}`, putConfig(jwt, contact))
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {
