@@ -9,10 +9,10 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 ### Develop
 
 - [ ] forms
-  - [ ] contact forms
-    - [ ] create
-      - [ ] wire
-      - [ ] actions
+  - [x] contact forms
+    - [x] create
+      - [x] wire
+      - [x] actions
   - [ ] job forms
     - [ ] create
       - [ ] wire
@@ -25,26 +25,15 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
       - [x] disable delete with contact FK
       - [ ] contact picker
       - [ ] contact maker
-- [ ] handling validation failures
+- [ ] set adapters to pull jwt directly from the store (simplify fetch)
+- [ ] handling validation failures (see validations.md for notes)
   - [ ] jobs
-    - [ ] presence: company, date_posted, is_remote, status, title, job_type,
-    - [ ] is_remote options: yes, no, hybrid
-    - [ ] status options: new, applied, interviewing, offer, accepted, rejected, declined, closed
-    - [ ] job_type options: front-end, back-end, full-stack, other
-    - [ ] description or posting_url url required
-    - [ ] date_applied >= date_posted
-    - [ ] status cannot be new if date_applied used
-  - [ ] contacts
-    - [ ] presence: first_name, last_name, contact_type
-    - [ ] contact_type options: recruiter, personal, peer, manager, employee, flatiron alumni, other
-    - [ ] email matches REGEX
-    - [ ] phone matches REGEX (U.S. only) nnn-nnn-nnnn or (nnn)nnn-nnnn
   - [ ] contacts
 - [x] details
   - [x] contacts
   - [x] jobs
     - [x] disable delete with contact FK
-- [ ] indices
+- [ ] index pages
   - [x] contacts
   - [x] jobs
   - [ ] user
