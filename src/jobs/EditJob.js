@@ -20,9 +20,9 @@ export function EditJob() {
     return navigate(-1)
   }
 
-  const handleSubmit = ({ event, submittedJob }) => {
+  const handleSubmit = ({ event, job }) => {
     event.preventDefault()
-    fetch(`${url.jobs}/${job.id}`, putConfig(jwt, submittedJob))
+    fetch(`${url.jobs}/${job.id}`, putConfig(jwt, job))
       .then((resp) => {
         return resp.json()
       })
