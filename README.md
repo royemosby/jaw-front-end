@@ -14,16 +14,16 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
       - [x] wire
       - [x] actions
   - [ ] job forms
-    - [ ] create
-      - [ ] wire
-      - [ ] actions
-      - [ ] contact picker
+    - [x] create
+      - [x] wire
+      - [x] actions
+      - [x] contact picker
       - [ ] contact maker
     - [ ] edit
       - [x] wire
       - [x] actions
       - [x] disable delete with contact FK
-      - [ ] contact picker
+      - [x] contact picker
       - [ ] contact maker
 - [ ] set adapters to pull jwt directly from the store (simplify fetch)
 - [ ] handling validation failures (see validations.md for notes)
