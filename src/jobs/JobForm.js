@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 //TODO select or add contact
 export function JobForm({ job, children, handleSubmit }) {
@@ -13,7 +14,7 @@ export function JobForm({ job, children, handleSubmit }) {
   const [company, setCompany] = useState('')
   const [location, setLocation] = useState('')
   const [is_remote, setIsRemote] = useState('')
-  const [status, setStatus] = useState('New')
+  const [status, setStatus] = useState('new')
   const [posting_url, setPostingUrl] = useState('')
   const [logo_url, setLogoUrl] = useState('')
   const [date_posted, setDatePosted] = useState('')
@@ -22,6 +23,9 @@ export function JobForm({ job, children, handleSubmit }) {
   const [date_applied, setDateApplied] = useState('')
   const [contact_id, setContactId] = useState('')
   const [id, setId] = useState('')
+
+  const contacts = useSelector((state) => state.contacts.contacts)
+  const contactIds = useSelector((state) => state.contacts.contactIds)
 
   useEffect(() => {
     if (job) {
@@ -61,8 +65,16 @@ export function JobForm({ job, children, handleSubmit }) {
         notes,
         date_applied,
         id,
+        contact_id,
       },
     })
+  }
+
+  const renderContactsSelector = () => {
+    //<option value="contact_id">Contact's full name</option>
+    return contactIds.map((c) => (
+      <option value={c}>contacts[c].first_name contacts[c].last_name</option>
+    ))
   }
 
   return (
@@ -99,7 +111,7 @@ export function JobForm({ job, children, handleSubmit }) {
         id="company"
         required
         value={company}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setCompany(e.target.value)}
       />
       <label htmlFor="logo_url">Logo Url</label>
       <input
@@ -146,6 +158,22 @@ export function JobForm({ job, children, handleSubmit }) {
         <option value="declined">Declined</option>
         <option value="closed">Closed</option>
       </select>
+      <label htmlFor="contact">Contact</label>
+      <select
+        name="contact"
+        id="contact"
+        className="text-black"
+        value={contact_id}
+        onChange={(e) => setContactId(e.target.value)}>
+        <option value="">Select</option>
+        <option value="">None</option>
+        {contactIds.map((c) => (
+          <option value={c} key={c}>
+            {`${contacts[c].first_name} ${contacts[c].last_name}`}
+          </option>
+        ))}
+      </select>
+
       <label htmlFor="posting_url">Posting URL</label>
       <input
         className="text-black"
