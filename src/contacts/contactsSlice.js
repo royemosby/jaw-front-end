@@ -6,6 +6,7 @@ const initialState = {
   contactIds: [],
   message: '',
   shooters: 0,
+  fullyLoaded: false,
 }
 
 const contactsSlice = createSlice({
@@ -30,6 +31,7 @@ const contactsSlice = createSlice({
         }
       })
       state.contactIds = ids.sort()
+      state.fullyLoaded = true
     },
     addContact(state, action) {
       const contactFlattened = action.payload.data.attributes

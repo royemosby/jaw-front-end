@@ -6,6 +6,7 @@ const initialState = {
   jobIds: [],
   message: '',
   shooters: 0,
+  fullyLoaded: false,
 }
 
 const jobsSlice = createSlice({
@@ -29,6 +30,7 @@ const jobsSlice = createSlice({
         }
       })
       state.jobIds = ids.sort()
+      state.fullyLoaded = true
     },
     addJob: (state, action) => {
       const jobFlattened = action.payload.data.attributes
