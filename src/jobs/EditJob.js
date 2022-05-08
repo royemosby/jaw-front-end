@@ -21,6 +21,9 @@ export function EditJob() {
   }
 
   const handleSubmit = ({ event, job }) => {
+    if (job.contact_id && job.contact_id.length > 7) {
+      job.contact_id = job.contact_id.slice(7, job.length)
+    }
     event.preventDefault()
     fetch(`${url.jobs}/${job.id}`, putConfig(jwt, job))
       .then((resp) => {
