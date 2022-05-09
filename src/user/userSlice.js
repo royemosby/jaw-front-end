@@ -25,6 +25,9 @@ const userSlice = createSlice({
     setUserMessage: (state, action) => {
       state.message = action.payload.message
     },
+    clearUserMessage: (state) => {
+      state.message = ''
+    },
   },
 })
 
