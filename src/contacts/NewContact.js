@@ -6,7 +6,7 @@ import { url, postConfig } from '../adapters/config'
 import { useSelector, useDispatch } from 'react-redux'
 import { zeroPad } from '../utilityFunctions/zeroPad'
 
-export function NewContact() {
+export function NewContact({ asModal = false, closeModal }) {
   const navigate = useNavigate()
   const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
@@ -20,13 +20,25 @@ export function NewContact() {
           setContactsMessage(resp)
         } else {
           dispatch(addContact(resp))
-          //TODO: ?Cleaner way to redirect?
-          navigate(`/contacts/contact${zeroPad(resp.data.attributes.id)}`)
+          //TODO ?Cleaner way to redirect?
+          if (!asModal) {
+            navigate(`/contacts/contact${zeroPad(resp.data.attributes.id)}`)
+          } else {
+            closeModal({
+              contactId: `contact${zeroPad(resp.data.attributes.id)}`,
+            })
+          }
         }
       })
   }
 
-  const handleCancel = () => navigate(-1)
+  const handleCancel = () => {
+    if (asModal) {
+      closeModal({ contactId: false })
+    } else {
+      navigate(-1)
+    }
+  }
 
   return (
     <div>
