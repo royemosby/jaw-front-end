@@ -1,3 +1,10 @@
+import { store } from '../store'
+
+const jwt = () => {
+  const state = store.getState()
+  return state.user.jwt
+}
+
 export const url = {
   base: process.env.REACT_APP_API_URL,
 }
@@ -17,48 +24,48 @@ export function authConfig(body = {}) {
   }
 }
 
-export function getConfig(jwt) {
+export function getConfig() {
   return {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt()}`,
     },
   }
 }
 
-export function postConfig(jwt, body = {}) {
+export function postConfig(body = {}) {
   return {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt()}`,
     },
     body: JSON.stringify(body),
   }
 }
 
-export function putConfig(jwt, body = {}) {
+export function putConfig(body = {}) {
   return {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt()}`,
     },
     body: JSON.stringify(body),
   }
 }
 
-export function deleteConfig(jwt) {
+export function deleteConfig() {
   return {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: `Bearer ${jwt}`,
+      Authorization: `Bearer ${jwt()}`,
     },
   }
 }
