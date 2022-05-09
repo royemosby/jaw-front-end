@@ -9,11 +9,10 @@ export function Jobs() {
   const jobs = useSelector((state) => state.jobs.jobs)
   const jobIds = useSelector((state) => state.jobs.jobIds)
   const message = useSelector((state) => state.jobs.message)
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    fetch(url.jobs, getConfig(jwt))
+    fetch(url.jobs, getConfig())
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {

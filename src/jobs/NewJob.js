@@ -8,7 +8,6 @@ import { zeroPad } from '../utilityFunctions/zeroPad'
 
 export function NewJob() {
   const navigate = useNavigate()
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   const handleSubmit = ({ event, job }) => {
@@ -16,7 +15,7 @@ export function NewJob() {
       job.contact_id = job.contact_id.slice(7, job.length)
     }
     event.preventDefault()
-    fetch(url.jobs, postConfig(jwt, job))
+    fetch(url.jobs, postConfig(job))
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {

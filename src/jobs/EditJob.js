@@ -11,7 +11,6 @@ import { updateJob, deleteJob, setJobsMessage } from './jobsSlice'
 export function EditJob() {
   const { jobId } = useParams()
   const job = useSelector((state) => state.jobs.jobs[jobId])
-  const jwt = useSelector((state) => state.user.jwt)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
@@ -25,7 +24,7 @@ export function EditJob() {
       job.contact_id = job.contact_id.slice(7, job.length)
     }
     event.preventDefault()
-    fetch(`${url.jobs}/${job.id}`, putConfig(jwt, job))
+    fetch(`${url.jobs}/${job.id}`, putConfig(job))
       .then((resp) => {
         return resp.json()
       })
@@ -57,7 +56,7 @@ export function EditJob() {
   }
 
   const handleDialogConfirm = () => {
-    fetch(`${url.jobs}/${job.id}`, deleteConfig(jwt))
+    fetch(`${url.jobs}/${job.id}`, deleteConfig())
       .then((resp) => {
         if (resp.ok) {
           return resp.json()

@@ -29,7 +29,6 @@ export function JobDetails() {
     id,
   } = useSelector((state) => state.jobs.jobs[jobId])
 
-  const jwt = useSelector((state) => state.user.jwt)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -50,7 +49,7 @@ export function JobDetails() {
   }
 
   const handleDialogConfirm = () => {
-    fetch(`${url.jobs}/${id}`, deleteConfig(jwt))
+    fetch(`${url.jobs}/${id}`, deleteConfig())
       .then((resp) => {
         if (resp.ok) {
           return resp.json()

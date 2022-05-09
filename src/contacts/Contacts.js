@@ -13,12 +13,11 @@ export function Contacts() {
   const contacts = useSelector((state) => state.contacts.contacts)
   const contactIds = useSelector((state) => state.contacts.contactIds)
   const message = useSelector((state) => state.contacts.message)
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(clearContactsMessage)
-    fetch(url.contacts, getConfig(jwt))
+    fetch(url.contacts, getConfig())
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {

@@ -14,7 +14,6 @@ import {
 export function EditContact() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
   const { contactId } = useParams()
-  const jwt = useSelector((state) => state.user.jwt)
   const contact = useSelector((state) => state.contacts.contacts[contactId])
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -29,7 +28,7 @@ export function EditContact() {
 
   const handleSubmit = ({ event, contact }) => {
     event.preventDefault()
-    fetch(`${url.contacts}/${contact.id}`, putConfig(jwt, contact))
+    fetch(`${url.contacts}/${contact.id}`, putConfig(contact))
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {
@@ -51,7 +50,7 @@ export function EditContact() {
     setDialogIsOpen(false)
   }
   const handleDialogConfirm = () => {
-    fetch(`${url.contacts}/${contact.id}`, deleteConfig(jwt))
+    fetch(`${url.contacts}/${contact.id}`, deleteConfig())
       .then((resp) => {
         if (resp.ok) {
           return resp.json()

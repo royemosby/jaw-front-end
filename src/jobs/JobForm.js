@@ -33,10 +33,9 @@ export function JobForm({ job, children, handleSubmit }) {
   const contacts = useSelector((state) => state.contacts.contacts)
   const contactIds = useSelector((state) => state.contacts.contactIds)
   const contactsLoaded = useSelector((state) => state.contacts.fullyLoaded)
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
   const loadContacts = () => {
-    fetch(url.contacts, getConfig(jwt))
+    fetch(url.contacts, getConfig())
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {

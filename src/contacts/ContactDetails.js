@@ -32,7 +32,6 @@ export function ContactDetails() {
     }
   }
 
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -44,7 +43,7 @@ export function ContactDetails() {
   }
   //deleteUrl an alias because 'url' name collision
   const handleDialogConfirm = () => {
-    fetch(`${deleteUrl.contacts}/${id}`, deleteConfig(jwt))
+    fetch(`${deleteUrl.contacts}/${id}`, deleteConfig())
       .then((resp) => {
         if (resp.ok) {
           return resp.json()

@@ -23,14 +23,13 @@ export function ContactCard({
   const storeJobs = useSelector((state) => state.jobs.jobs)
   const storeJobIds = useSelector((state) => state.jobs.jobIds)
   const storeJobsMessage = useSelector((state) => state.jobs.message)
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (jobIds) {
       jobIds.forEach((id) => {
         if (!storeJobs[id]) {
-          fetch(`${fetchUrl.jobs}/${unpad(id)}`, getConfig(jwt))
+          fetch(`${fetchUrl.jobs}/${unpad(id)}`, getConfig())
             .then((resp) => resp.json())
             .then((resp) => {
               if (resp.message) {

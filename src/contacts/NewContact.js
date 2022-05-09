@@ -8,12 +8,11 @@ import { zeroPad } from '../utilityFunctions/zeroPad'
 
 export function NewContact({ asModal = false, closeModal }) {
   const navigate = useNavigate()
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   const handleSubmit = ({ event, contact }) => {
     event.preventDefault()
-    fetch(url.contacts, postConfig(jwt, contact))
+    fetch(url.contacts, postConfig(contact))
       .then((resp) => resp.json())
       .then((resp) => {
         if (resp.message) {

@@ -24,12 +24,11 @@ export function JobCard({
   const storeContacts = useSelector((state) => state.contacts.contacts)
   const storeContactIds = useSelector((state) => state.contacts.contactIds)
   const storeContactsMessage = useSelector((state) => state.contacts.contactIds)
-  const jwt = useSelector((state) => state.user.jwt)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (contact_id && !storeContacts[contact_id]) {
-      fetch(`${url.contacts}/${unpad(contact_id)}`, getConfig(jwt))
+      fetch(`${url.contacts}/${unpad(contact_id)}`, getConfig())
         .then((resp) => resp.json())
         .then((resp) => {
           if (resp.message) {
