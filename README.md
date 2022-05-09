@@ -8,45 +8,35 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 ### Develop
 
-- [ ] forms
-  - [x] contact forms
-    - [x] create
-      - [x] wire
-      - [x] actions
-  - [ ] job forms
-    - [x] create
-      - [x] wire
-      - [x] actions
-      - [x] contact picker
-      - [ ] contact maker
-    - [ ] edit
-      - [x] wire
-      - [x] actions
-      - [x] disable delete with contact FK
-      - [x] contact picker
-      - [ ] contact maker
 - [ ] set adapters to pull jwt directly from the store (simplify fetch)
 - [ ] handling validation failures (see validations.md for notes)
   - [ ] jobs
   - [ ] contacts
-- [x] details
-  - [x] contacts
-  - [x] jobs
-    - [x] disable delete with contact FK
 - [ ] index pages
   - [x] contacts
   - [x] jobs
   - [ ] user
-- [ ] backend updates
-  - [ ] remove fk constraint and remove fk's
-    - [ ] contact
-    - [ ] job
-    - [ ] update front-end state
+- [ ] caching strategy (leverage fullyLoaded in slices)
+  - [ ] prevent reloading every time index is visited
+    - [ ] contacts
+    - [ ] jobs
+    - [ ] user
+  - [ ] update contact association on job update
+    - [ ] contact that is selected (add jobId)
+    - [ ] contact that is de-selected (remove jobId)
+- [ ] API updates
   - [ ] Change is_remote enum to "In person", "Remote", or "Hybrid"
   - [ ] Change contact.url to contact.social_url
     - [ ] un-alias imported config urls in ContactDetails, ContactCard
   - [ ] Change date formats from xxxx-xx-xx to xx/xx/xxxx
   - [ ] CORS errors arises from a couple individual resource fetches after server restarted. Does not happen when logged out then log back in. Troubleshoot.
+  - [ ] remove fk constraint and remove fk's
+    - [ ] contact
+    - [ ] job
+    - [ ] update front-end state
+- [ ] animations/transitions
+  - [ ] convert all useEffect fetches into thunks
+  - [ ] research animations/transitions
 
 ### Style tweaks
 
