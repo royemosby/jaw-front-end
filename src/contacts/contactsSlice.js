@@ -7,6 +7,7 @@ const initialState = {
   message: '',
   shooters: 0,
   fullyLoaded: false,
+  fieldErrors: {},
 }
 
 const contactsSlice = createSlice({
@@ -73,6 +74,12 @@ const contactsSlice = createSlice({
     clearContactsMessage: (state) => {
       state.message = ''
     },
+    addFieldErrors: (state, action) => {
+      state.fieldErrors = action.payload.errors
+    },
+    clearFieldErrors: (state) => {
+      state.fieldErrors = {}
+    },
   },
 })
 
@@ -83,5 +90,7 @@ export const {
   deleteContact,
   setContactsMessage,
   clearContactsMessage,
+  addFieldErrors,
+  clearFieldErrors,
 } = contactsSlice.actions
 export default contactsSlice.reducer

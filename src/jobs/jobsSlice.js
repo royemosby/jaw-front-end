@@ -7,6 +7,7 @@ const initialState = {
   message: '',
   shooters: 0,
   fullyLoaded: false,
+  fieldErrors: {},
 }
 
 const jobsSlice = createSlice({
@@ -71,6 +72,12 @@ const jobsSlice = createSlice({
     clearJobsMessage: (state) => {
       state.message = ''
     },
+    addFieldErrors: (state, action) => {
+      state.fieldErrors = action.payload.errors
+    },
+    clearFieldErrors: (state) => {
+      state.fieldErrors = {}
+    },
   },
 })
 
@@ -81,5 +88,7 @@ export const {
   deleteJob,
   setJobsMessage,
   clearJobsMessage,
+  addFieldErrors,
+  clearFieldErrors,
 } = jobsSlice.actions
 export default jobsSlice.reducer
