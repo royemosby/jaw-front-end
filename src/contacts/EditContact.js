@@ -37,7 +37,7 @@ export function EditContact() {
     fetch(`${url.contacts}/${contact.id}`, putConfig(contact))
       .then((resp) => {
         if (resp.ok) {
-          resp.json()
+          return resp.json()
         } else {
           const reader = resp.body.getReader()
           return reader.read().then(({ done, value }) => {
