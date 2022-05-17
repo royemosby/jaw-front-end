@@ -8,10 +8,9 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 ### Develop
 
+- [ ] user form
+- [ ] new user flow
 - [ ] API updates
-  - [ ] Change is_remote enum to "In person", "Remote", or "Hybrid"
-  - [ ] Change contact.url to contact.social_url
-    - [ ] un-alias imported config urls in ContactDetails, ContactCard
   - [ ] CORS errors arises from a couple individual resource fetches after server restarted. Does not happen when logged out then log back in. Troubleshoot.
   - [ ] remove fk constraint and remove fk's
     - [ ] contact
@@ -25,7 +24,7 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 - [ ] Active/hover state styles
 - [ ] Link indicator on card
-- [ ] improve disabled button ux
+- [ ] Link indicator on contact's name if link
 
 ### QA/QC
 
