@@ -28,7 +28,7 @@ export function Jobs() {
           dispatch(addJobs(resp))
         }
       })
-  }, [])
+  }, [dispatch])
 
   const mapJobs = () => {
     if (message) {

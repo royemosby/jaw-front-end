@@ -22,8 +22,6 @@ export function JobCard({
   jobId,
 }) {
   const storeContacts = useSelector((state) => state.contacts.contacts)
-  const storeContactIds = useSelector((state) => state.contacts.contactIds)
-  const storeContactsMessage = useSelector((state) => state.contacts.contactIds)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -38,7 +36,7 @@ export function JobCard({
           }
         })
     }
-  }, [])
+  }, [contact_id, storeContacts, dispatch])
 
   const jobContact = () => {
     if (contact_id && storeContacts[contact_id]) {

@@ -1,13 +1,10 @@
-import { Button, buttonStyles } from './buttons/Button'
+import { Button } from './buttons/Button'
 export function DeleteDialog({
   text = 'Dialog text is not set',
   title = 'title is not set',
   cancelHandler,
   confirmHandler,
 }) {
-  const handleSubmit = (e) => {
-    console.log(e.target.value)
-  }
   return (
     <>
       <div className="bg-slate-400/50 h-screen w-screen absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 backdrop-blur-sm"></div>

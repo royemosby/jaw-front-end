@@ -1,4 +1,3 @@
-import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { url, getConfig } from '../adapters/config'
@@ -41,19 +40,6 @@ export function JobForm({ job, children, handleSubmit }) {
   const fieldErrors = useSelector((state) => state.jobs.fieldErrors)
   const dispatch = useDispatch()
 
-  const loadContacts = () => {
-    fetch(url.contacts, getConfig())
-      .then((resp) => resp.json())
-      .then((resp) => {
-        if (resp.message) {
-          console.log(resp.message)
-          dispatch(setContactsMessage)
-        } else {
-          dispatch(addContacts(resp))
-        }
-      })
-  }
-
   useEffect(() => {
     if (job) {
       setTitle(job.title || '')
@@ -74,9 +60,19 @@ export function JobForm({ job, children, handleSubmit }) {
       setDatePosted(today)
     }
     if (!contactsLoaded) {
-      loadContacts()
+      console.log('woof')
+      fetch(url.contacts, getConfig())
+        .then((resp) => resp.json())
+        .then((resp) => {
+          if (resp.message) {
+            console.log(resp.message)
+            dispatch(setContactsMessage)
+          } else {
+            dispatch(addContacts(resp))
+          }
+        })
     }
-  }, [])
+  }, [job, contactsLoaded, dispatch])
 
   useEffect(() => {
     if (contact_id === 'createNew') {
@@ -89,6 +85,7 @@ export function JobForm({ job, children, handleSubmit }) {
     setLogoUrlError(fieldErrors?.logo_url ? 'error' : '')
     setPostingUrlError(fieldErrors?.posting_url ? 'error' : '')
     setDateAppliedError(fieldErrors?.date_applied ? 'error' : '')
+    setDescriptionError(fieldErrors?.description ? 'error' : '')
   }, [fieldErrors])
 
   const submit = (e) => {
@@ -124,7 +121,7 @@ export function JobForm({ job, children, handleSubmit }) {
   }
 
   const createContact = () => {
-    if (contact_id === 'createNew') {
+    if (contactModalOpen === true) {
       return (
         <ModalShell>
           <NewContact asModal={true} closeModal={closeContactModal} />
@@ -203,7 +200,7 @@ export function JobForm({ job, children, handleSubmit }) {
           <option value="in-person">In person</option>
           <option value="hybrid">Hybrid</option>
         </select>
-        <label classList={statusError} htmlFor="status">
+        <label className={statusError} htmlFor="status">
           Status
         </label>
         <select

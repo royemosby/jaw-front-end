@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import placeholder from '../contact.svg'
 import { ConditionalLinkWrapper } from '../common/conditionalLinkWrapper'
 import { useEffect } from 'react'
-//url name collision w/contact.url
-import { url as fetchUrl, getConfig } from '../adapters/config'
+import { url, getConfig } from '../adapters/config'
 import { unpad } from '../utilityFunctions/unpad'
 import { addJob, setJobsMessage } from '../jobs/jobsSlice'
 
@@ -13,7 +12,7 @@ export function ContactCard({
   last_name,
   contact_type,
   email,
-  url,
+  social_url,
   phone,
   jobIds,
   id,
@@ -21,15 +20,13 @@ export function ContactCard({
   contactId,
 }) {
   const storeJobs = useSelector((state) => state.jobs.jobs)
-  const storeJobIds = useSelector((state) => state.jobs.jobIds)
-  const storeJobsMessage = useSelector((state) => state.jobs.message)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (jobIds) {
       jobIds.forEach((id) => {
         if (!storeJobs[id]) {
-          fetch(`${fetchUrl.jobs}/${unpad(id)}`, getConfig())
+          fetch(`${url.jobs}/${unpad(id)}`, getConfig())
             .then((resp) => resp.json())
             .then((resp) => {
               if (resp.message) {
@@ -41,7 +38,7 @@ export function ContactCard({
         }
       })
     }
-  }, [])
+  }, [dispatch, jobIds, storeJobs])
 
   const contactJobs = () => {
     if (jobIds && jobIds.length > 0) {
@@ -65,9 +62,6 @@ export function ContactCard({
     }
   }
 
-  const handleOpen = () => console.log(`Open contact: ${contactId}`)
-  const handleEdit = () => console.log(`Edit contact: ${contactId}`)
-
   return (
     <Card resourceId={contactId} route="contacts">
       <div className="flex">
@@ -76,7 +70,7 @@ export function ContactCard({
         </div>
         <div className="text-left grow">
           <h2 className="text-left">
-            <ConditionalLinkWrapper link={url} condition={!!url}>
+            <ConditionalLinkWrapper link={social_url} condition={!!social_url}>
               {first_name} {last_name}{' '}
             </ConditionalLinkWrapper>
           </h2>
@@ -97,16 +91,3 @@ export function ContactCard({
     </Card>
   )
 }
-
-/*
-string "first_name"
-string "last_name"
-string "contact_type"
-string "email"
-string "url"
-string "phone"
-text "notes"
-bigint "user_id"
-datetime "created_at"
-obj{date, time} "updated_at"
-*/

@@ -11,20 +11,18 @@ export function ErrorMessages() {
   const contactsErrors = useSelector((state) => state.contacts.fieldErrors)
   const jobsErrors = useSelector((state) => state.jobs.fieldErrors)
 
-  const renderMessages = () => {
-    if (userErrors || contactsErrors || jobsErrors) {
-      return [userErrors, contactsErrors, jobsErrors].map((message) => {
-        if (message) {
-          return Object.keys(message).map((key, idx) => (
-            <>
-              <h3 key={`h3${idx}`} className="text-2xl font-bold">
-                {key}:
-              </h3>
-              <p key={`p${idx}`}>- {message[key].join('/n- ')}</p>
-            </>
-          ))
-        }
-      })
+  const renderMessage = (errors) => {
+    if (errors) {
+      return Object.keys(errors).map((key, idx) => (
+        <>
+          <h3 key={`h3${idx}`} className="text-2xl font-bold">
+            {key}:
+          </h3>
+          <p key={`p${idx}`}>- {errors[key].join('/n- ')}</p>
+        </>
+      ))
+    } else {
+      return <></>
     }
   }
 
@@ -35,7 +33,9 @@ export function ErrorMessages() {
           <h1 className="text-3xl  font-bold text-center">
             Errors occurred while processing your request
           </h1>
-          {renderMessages()}
+          {renderMessage(userErrors)}
+          {renderMessage(jobsErrors)}
+          {renderMessage(contactsErrors)}
         </div>
         <Button text="OK" action={(e) => dispatch(closeModal())}></Button>
       </ModalShell>

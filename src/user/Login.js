@@ -21,7 +21,6 @@ export function Login() {
         return resp.json()
       })
       .then((resp) => {
-        //TODO: ?should this be a part of the errors modal?
         if (resp.message && resp.message === 'Invalid username or password') {
           dispatch(setUserMessage(resp))
         } else {
@@ -32,8 +31,6 @@ export function Login() {
       })
       .catch((e) => console.dir(e))
   }
-
-  const displayTest = () => (user.jwt ? <h3>Logged in already!</h3> : null)
 
   return (
     <div className="border-4 border-slate-400 p-2">

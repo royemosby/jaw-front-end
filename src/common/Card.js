@@ -1,4 +1,3 @@
-import { editableInputTypes } from '@testing-library/user-event/dist/utils'
 import { CardButtons } from '../common/buttons/CardButtons'
 
 export function Card({ children, resourceId = 'notSet', route = 'none' }) {

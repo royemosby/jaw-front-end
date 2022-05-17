@@ -30,8 +30,6 @@ const mainStyles =
   'm-auto text-center max-w-6xl	flex flex-col items-stretch h-full border-2 border-slate-600 shadow-cover p-2'
 
 function App() {
-  const contacts = useSelector((state) => state.contacts.contacts)
-  const jobs = useSelector((state) => state.jobs.jobs)
   const user = useSelector((state) => state.user)
   const protectedRoutes = () => {
     if (user.jwt) {

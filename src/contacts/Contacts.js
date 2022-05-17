@@ -28,7 +28,7 @@ export function Contacts() {
           dispatch(addContacts(resp))
         }
       })
-  }, [])
+  }, [dispatch])
   const mapContacts = () => {
     if (message) {
       return (

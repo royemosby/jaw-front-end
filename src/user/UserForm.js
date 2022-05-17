@@ -1,4 +1,3 @@
-import logo from '../wrangler.svg'
 import { Button } from '../common/buttons/Button'
 
 export function UserForm({ buttonText = 'Update' }) {
@@ -16,8 +15,12 @@ export function UserForm({ buttonText = 'Update' }) {
         Password
       </label>
       <input type="password" className="border-slate-300 border-2 mb-2" />
-      <Button text={buttonText} classProps="col-span-2 font-display text-lg"></Button>
-      <Button text="Cancel" classProps="col-span-2 font-display text-lg"></Button>
+      <Button
+        text={buttonText}
+        classProps="col-span-2 font-display text-lg"></Button>
+      <Button
+        text="Cancel"
+        classProps="col-span-2 font-display text-lg"></Button>
     </form>
   )
 }

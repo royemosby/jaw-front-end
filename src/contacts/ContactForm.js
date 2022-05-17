@@ -10,8 +10,8 @@ export function ContactForm({ contact, children, handleSubmit }) {
   const [emailError, setEmailError] = useState('')
   const [phone, setPhone] = useState('')
   const [phoneError, setPhoneError] = useState('')
-  const [url, setUrl] = useState('')
-  const [urlError, setUrlError] = useState('')
+  const [social_url, setSocialUrl] = useState('')
+  const [socialUrlError, setSocialUrlError] = useState('')
   const [notes, setNotes] = useState('')
   const [id, setId] = useState('')
 
@@ -25,16 +25,16 @@ export function ContactForm({ contact, children, handleSubmit }) {
       setContactType(contact.contact_type || '')
       setEmail(contact.email || '')
       setPhone(contact.phone || '')
-      setUrl(contact.url || '')
+      setSocialUrl(contact.social_url || '')
       setNotes(contact.notes || '')
       setId(contact.id || '')
     }
-  }, [])
+  }, [contact])
 
   useEffect(() => {
     setEmailError(fieldErrors?.email ? 'error' : '')
     setPhoneError(fieldErrors?.phone ? 'error' : '')
-    setUrlError(fieldErrors?.url ? 'error' : '')
+    setSocialUrlError(fieldErrors?.social_url ? 'error' : '')
   }, [fieldErrors])
 
   const submit = (e) => {
@@ -47,7 +47,7 @@ export function ContactForm({ contact, children, handleSubmit }) {
         contact_type,
         email,
         phone,
-        url,
+        social_url,
         notes,
         id,
       },
@@ -110,15 +110,15 @@ export function ContactForm({ contact, children, handleSubmit }) {
         onChange={(e) => setPhone(e.target.value)}
         name="phone"
       />
-      <label htmlFor="url" className={urlError}>
+      <label htmlFor="url" className={socialUrlError}>
         Social Presence
       </label>
       <input
         type="text"
-        className={`${urlError} text-black`}
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-        name="url"
+        className={`${socialUrlError} text-black`}
+        value={social_url}
+        onChange={(e) => setSocialUrl(e.target.value)}
+        name="social_url"
       />
       <label htmlFor="notes">Notes</label>
       <textarea
