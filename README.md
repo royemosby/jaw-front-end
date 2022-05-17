@@ -8,10 +8,6 @@ Max jobs or contacts is each 999. This can be adjusted in zeroPad() in utility f
 
 ### Develop
 
-- [ ] index pages
-  - [x] contacts
-  - [x] jobs
-  - [ ] user
 - [ ] API updates
   - [ ] Change is_remote enum to "In person", "Remote", or "Hybrid"
   - [ ] Change contact.url to contact.social_url
