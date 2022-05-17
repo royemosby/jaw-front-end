@@ -9,7 +9,11 @@ import {
   updateContact,
   deleteContact,
   setContactsMessage,
+  clearContactsMessage,
+  addFieldErrors,
+  clearFieldErrors,
 } from './contactsSlice'
+import { openModal } from '../common/ui/uiSlice'
 
 export function EditContact() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
@@ -28,19 +32,36 @@ export function EditContact() {
 
   const handleSubmit = ({ event, contact }) => {
     event.preventDefault()
+    dispatch(clearContactsMessage())
+    dispatch(clearFieldErrors())
     fetch(`${url.contacts}/${contact.id}`, putConfig(contact))
-      .then((resp) => resp.json())
+      .then((resp) => {
+        if (resp.ok) {
+          resp.json()
+        } else {
+          const reader = resp.body.getReader()
+          return reader.read().then(({ done, value }) => {
+            const message = new TextDecoder().decode(value)
+            return JSON.parse(message)
+          })
+        }
+      })
       .then((resp) => {
         if (resp.message) {
           dispatch(setContactsMessage(resp))
+        } else if (resp.errors) {
+          dispatch(addFieldErrors(resp))
+          dispatch(openModal())
         } else {
           dispatch(updateContact(resp))
           navigate(-1)
         }
       })
+      .catch((e) => console.dir(e.message))
   }
   const handleCancel = () => {
-    return navigate(-1)
+    dispatch(clearFieldErrors())
+    navigate(-1)
   }
   const handleDelete = () => {
     setDialogIsOpen(true)

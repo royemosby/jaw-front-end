@@ -6,7 +6,15 @@ import { useNavigate } from 'react-router-dom'
 import { url, putConfig, deleteConfig } from '../adapters/config'
 import { useState } from 'react'
 import { DeleteDialog } from '../common/DeleteDialog'
-import { updateJob, deleteJob, setJobsMessage } from './jobsSlice'
+import {
+  updateJob,
+  deleteJob,
+  setJobsMessage,
+  clearJobsMessage,
+  addFieldErrors,
+  clearFieldErrors,
+} from './jobsSlice'
+import { openModal } from '../common/ui/uiSlice'
 
 export function EditJob() {
   const { jobId } = useParams()
@@ -16,27 +24,41 @@ export function EditJob() {
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
 
   const handleCancel = () => {
+    dispatch(clearFieldErrors())
     return navigate(-1)
   }
 
   const handleSubmit = ({ event, job }) => {
+    event.preventDefault()
+    dispatch(clearJobsMessage())
+    dispatch(clearFieldErrors())
     if (job.contact_id && job.contact_id.length > 7) {
       job.contact_id = job.contact_id.slice(7, job.length)
     }
-    event.preventDefault()
     fetch(`${url.jobs}/${job.id}`, putConfig(job))
       .then((resp) => {
-        return resp.json()
+        if (resp.ok) {
+          return resp.json()
+        } else {
+          const reader = resp.body.getReader()
+          return reader.read().then(({ done, value }) => {
+            const message = new TextDecoder().decode(value)
+            return JSON.parse(message)
+          })
+        }
       })
       .then((resp) => {
         if (resp.message) {
-          console.log(resp.message)
           dispatch(setJobsMessage(resp.message))
+        } else if (resp.errors) {
+          dispatch(addFieldErrors(resp))
+          dispatch(openModal())
         } else {
           dispatch(updateJob(resp))
           navigate(-1)
         }
       })
+      .catch((e) => console.dir(e.message))
   }
 
   const disableDelete = () => {
