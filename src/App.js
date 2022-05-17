@@ -22,6 +22,7 @@ import { User } from './user/User'
 import { EditUser } from './user/EditUser'
 import { NewUser } from './user/NewUser'
 import { NotFound } from './common/NotFound'
+import { ErrorMessages } from './common/ErrorMessages'
 
 const wrapperStyles =
   'min-h-screen grid justify-center text-slate-100 content-between p-1'
@@ -74,6 +75,7 @@ function App() {
         </main>
         <Footer />
       </Router>
+      <ErrorMessages />
     </div>
   )
 }
