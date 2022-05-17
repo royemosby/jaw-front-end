@@ -3,7 +3,12 @@ import { Button } from '../common/buttons/Button'
 import { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { url, getConfig } from '../adapters/config'
-import { addJobs, setJobsMessage, clearJobsMessage } from '../jobs/jobsSlice'
+import {
+  addJobs,
+  setJobsMessage,
+  clearJobsMessage,
+  clearFieldErrors,
+} from '../jobs/jobsSlice'
 
 export function Jobs() {
   const jobs = useSelector((state) => state.jobs.jobs)
@@ -12,6 +17,8 @@ export function Jobs() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(clearFieldErrors)
+    dispatch(clearJobsMessage)
     fetch(url.jobs, getConfig())
       .then((resp) => resp.json())
       .then((resp) => {

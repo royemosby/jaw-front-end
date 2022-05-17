@@ -7,6 +7,7 @@ import {
   addContacts,
   setContactsMessage,
   clearContactsMessage,
+  clearFieldErrors,
 } from './contactsSlice'
 
 export function Contacts() {
@@ -16,6 +17,7 @@ export function Contacts() {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(clearFieldErrors)
     dispatch(clearContactsMessage)
     fetch(url.contacts, getConfig())
       .then((resp) => resp.json())
