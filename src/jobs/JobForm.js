@@ -5,8 +5,8 @@ import { url, getConfig } from '../adapters/config'
 import { setContactsMessage, addContacts } from '../contacts/contactsSlice'
 import { NewContact } from '../contacts/NewContact'
 import { ModalShell } from '../common/ModalShell'
+import { clearFieldErrors } from './jobsSlice'
 
-//TODO select or add contact
 export function JobForm({ job, children, handleSubmit }) {
   const today = () => {
     const dateTime = new Date().toISOString()
@@ -19,12 +19,17 @@ export function JobForm({ job, children, handleSubmit }) {
   const [location, setLocation] = useState('')
   const [is_remote, setIsRemote] = useState('')
   const [status, setStatus] = useState('new')
+  const [statusError, setStatusError] = useState('')
   const [posting_url, setPostingUrl] = useState('')
+  const [posting_urlError, setPostingUrlError] = useState('')
   const [logo_url, setLogoUrl] = useState('')
+  const [logo_urlError, setLogoUrlError] = useState('')
   const [date_posted, setDatePosted] = useState('')
   const [description, setDescription] = useState('')
+  const [descriptionError, setDescriptionError] = useState('')
   const [notes, setNotes] = useState('')
   const [date_applied, setDateApplied] = useState('')
+  const [date_appliedError, setDateAppliedError] = useState('')
   const [contact_id, setContactId] = useState('')
   const [id, setId] = useState('')
 
@@ -33,7 +38,9 @@ export function JobForm({ job, children, handleSubmit }) {
   const contacts = useSelector((state) => state.contacts.contacts)
   const contactIds = useSelector((state) => state.contacts.contactIds)
   const contactsLoaded = useSelector((state) => state.contacts.fullyLoaded)
+  const fieldErrors = useSelector((state) => state.jobs.fieldErrors)
   const dispatch = useDispatch()
+
   const loadContacts = () => {
     fetch(url.contacts, getConfig())
       .then((resp) => resp.json())
@@ -77,7 +84,15 @@ export function JobForm({ job, children, handleSubmit }) {
     }
   }, [contact_id])
 
+  useEffect(() => {
+    setStatusError(fieldErrors?.status ? 'error' : '')
+    setLogoUrlError(fieldErrors?.logo_url ? 'error' : '')
+    setPostingUrlError(fieldErrors?.posting_url ? 'error' : '')
+    setDateAppliedError(fieldErrors?.date_applied ? 'error' : '')
+  }, [fieldErrors])
+
   const submit = (e) => {
+    dispatch(clearFieldErrors())
     handleSubmit({
       event: e,
       job: {
@@ -99,10 +114,8 @@ export function JobForm({ job, children, handleSubmit }) {
     })
   }
 
-  //TODO need error handling
   const closeContactModal = ({ contactId }) => {
     if (!!contactId) {
-      console.log('!!!!!!!', contactId)
       setContactId(contactId)
     } else {
       setContactId('')
@@ -159,9 +172,11 @@ export function JobForm({ job, children, handleSubmit }) {
           value={company}
           onChange={(e) => setCompany(e.target.value)}
         />
-        <label htmlFor="logo_url">Logo Url</label>
+        <label className={logo_urlError} htmlFor="logo_url">
+          Logo Url
+        </label>
         <input
-          className="text-black"
+          className={`${logo_urlError} text-black`}
           type="text"
           name="logo_url"
           value={logo_url}
@@ -188,12 +203,14 @@ export function JobForm({ job, children, handleSubmit }) {
           <option value="no">No</option>
           <option value="hybrid">Hybrid</option>
         </select>
-        <label htmlFor="status">Status</label>
+        <label classList={statusError} htmlFor="status">
+          Status
+        </label>
         <select
           onChange={(e) => setStatus(e.target.value)}
           name="status"
           id="status"
-          className="text-black"
+          className={`${statusError} text-black`}
           value={status}>
           <option value="new">New</option>
           <option value="applied">Applied</option>
@@ -220,9 +237,11 @@ export function JobForm({ job, children, handleSubmit }) {
           ))}
         </select>
 
-        <label htmlFor="posting_url">Posting URL</label>
+        <label className={posting_urlError} htmlFor="posting_url">
+          Posting URL
+        </label>
         <input
-          className="text-black"
+          className={`${posting_urlError} text-black`}
           type="text"
           name="posting_url"
           value={posting_url}
@@ -237,22 +256,26 @@ export function JobForm({ job, children, handleSubmit }) {
           value={date_posted}
           onChange={(e) => setDatePosted(e.target.value)}
         />
-        <label htmlFor="date_applied">Date Applied</label>
+        <label className={date_appliedError} htmlFor="date_applied">
+          Date Applied
+        </label>
         <input
           type="date"
           name="date_applied"
           id="date_applied"
-          className="text-black"
+          className={`${date_appliedError} text-black`}
           value={date_applied}
           onChange={(e) => setDateApplied(e.target.value)}
         />
-        <label htmlFor="description">Description</label>
+        <label className={descriptionError} htmlFor="description">
+          Description
+        </label>
         <textarea
           name="description"
           id="description"
           cols="40"
           rows="5"
-          className="text-black"
+          className={`${descriptionError} text-black`}
           onChange={(e) => setDescription(e.target.value)}
           value={description}></textarea>
         <label htmlFor="notes">Notes</label>

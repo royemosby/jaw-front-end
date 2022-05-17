@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { clearFieldErrors } from './contactsSlice'
 
 export function ContactForm({ contact, children, handleSubmit }) {
   const [first_name, setFirstName] = useState('')
   const [last_name, setLastName] = useState('')
   const [contact_type, setContactType] = useState('')
   const [email, setEmail] = useState('')
+  const [emailError, setEmailError] = useState('')
   const [phone, setPhone] = useState('')
+  const [phoneError, setPhoneError] = useState('')
   const [url, setUrl] = useState('')
+  const [urlError, setUrlError] = useState('')
   const [notes, setNotes] = useState('')
   const [id, setId] = useState('')
+
+  const fieldErrors = useSelector((state) => state.contacts.fieldErrors)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (contact) {
@@ -23,7 +31,14 @@ export function ContactForm({ contact, children, handleSubmit }) {
     }
   }, [])
 
+  useEffect(() => {
+    setEmailError(fieldErrors?.email ? 'error' : '')
+    setPhoneError(fieldErrors?.phone ? 'error' : '')
+    setUrlError(fieldErrors?.url ? 'error' : '')
+  }, [fieldErrors])
+
   const submit = (e) => {
+    dispatch(clearFieldErrors())
     return handleSubmit({
       event: e,
       contact: {
@@ -75,26 +90,32 @@ export function ContactForm({ contact, children, handleSubmit }) {
         <option value="flatiron alumni">Flatiron Alumni</option>
         <option value="other">Other</option>
       </select>
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email" className={emailError}>
+        Email
+      </label>
       <input
         type="text"
-        className="text-black"
+        className={`${emailError} text-black`}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         name="email"
       />
-      <label htmlFor="phone">Phone</label>
+      <label htmlFor="phone" className={phoneError}>
+        Phone
+      </label>
       <input
         type="text"
-        className="text-black"
+        className={`${phoneError} text-black`}
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         name="phone"
       />
-      <label htmlFor="url">Social Presence</label>
+      <label htmlFor="url" className={urlError}>
+        Social Presence
+      </label>
       <input
         type="text"
-        className="text-black"
+        className={`${urlError} text-black`}
         value={url}
         onChange={(e) => setUrl(e.target.value)}
         name="url"
