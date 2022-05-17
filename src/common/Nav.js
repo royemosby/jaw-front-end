@@ -18,16 +18,16 @@ export function Nav() {
           <Link to="/contacts" className={styles}>
             Contacts
           </Link>
-          <Link to="/user" className={styles}>
-            User
-          </Link>
           <Link to="/contacts/new" className={styles}>
             New Contact
+          </Link>
+          <Link to="/user" className={styles}>
+            Account Info
           </Link>
         </>
       )
     }
   }
 
-  return <ul>{protectedLinks()}</ul>
+  return <ul className="text-center">{protectedLinks()}</ul>
 }
