@@ -31,5 +31,5 @@ const userSlice = createSlice({
   },
 })
 
-export const { setUser, setUserMessage } = userSlice.actions
+export const { setUser, setUserMessage, clearUserMessage } = userSlice.actions
 export default userSlice.reducer
