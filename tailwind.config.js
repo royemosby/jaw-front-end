@@ -20,6 +20,10 @@ module.exports = {
       },
       width: {
         cover: 'calc(100vw - 2rem)',
+        '1/2': '50%',
+      },
+      minWidth: {
+        300: '300px',
       },
       minHeight: {
         cover: 'calc(100vh - 5rem)',
