@@ -199,8 +199,8 @@ export function JobForm({ job, children, handleSubmit }) {
           required
           onChange={(e) => setIsRemote(e.target.value)}>
           <option value="">Select</option>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
+          <option value="remote">Remote</option>
+          <option value="in-person">In person</option>
           <option value="hybrid">Hybrid</option>
         </select>
         <label classList={statusError} htmlFor="status">
