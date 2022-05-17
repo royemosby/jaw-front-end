@@ -5,3 +5,11 @@ body {
 .App-link {
   color: #61dafb;
 }
+
+label.error {
+  color: red;
+}
+
+input.error {
+  border: 2px solid red;
+}
