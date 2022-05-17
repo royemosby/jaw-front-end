@@ -17,9 +17,12 @@ export function Login() {
   const handleSubmit = (evt) => {
     evt.preventDefault()
     fetch(url.login, authConfig({ username, password }))
-      .then((resp) => resp.json())
       .then((resp) => {
-        if (resp.message) {
+        return resp.json()
+      })
+      .then((resp) => {
+        //TODO: ?should this be a part of the errors modal?
+        if (resp.message && resp.message === 'Invalid username or password') {
           dispatch(setUserMessage(resp))
         } else {
           dispatch(setUser(resp))
@@ -27,6 +30,7 @@ export function Login() {
         setUsername('')
         setPassword('')
       })
+      .catch((e) => console.dir(e))
   }
 
   const displayTest = () => (user.jwt ? <h3>Logged in already!</h3> : null)
@@ -40,7 +44,7 @@ export function Login() {
         <h2 className="font-display mb-2 text-2xl">
           Log in to Job Application Wrangler
         </h2>
-        {user.message ? <h3 className="text-red-500">Wrong un/pw</h3> : null}
+        {user.message ? <h3 className="text-red-500">{user.message}</h3> : null}
         <form
           onSubmit={handleSubmit}
           className="grid grid-cols-form gap-1 mb-4">
